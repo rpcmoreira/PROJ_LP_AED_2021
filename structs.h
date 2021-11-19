@@ -36,7 +36,6 @@ typedef struct list_cidades{
     int ncidades;
 } LIST_CIDADES;
 
-
 typedef struct ar_id_cidade{
     int *p_city;
     int nids;
