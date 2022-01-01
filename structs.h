@@ -27,7 +27,7 @@ typedef struct cidade{      //Gene
     char descricao[MAX250];
     COORDENADAS cc;
     ARRAY_POI ar_poi;
-    CIDADE *pnext;
+    struct cidade *pnext;
 }CIDADE;
 
 typedef struct list_cidades{
