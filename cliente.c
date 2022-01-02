@@ -31,6 +31,8 @@ void read_file_cliente_txt(){
     add_client_head(name, address, n_fiscal, contact, day, month, year);
     //add_client_tail(name, address, n_fiscal, contact, day, month, year);
     fclose(file);
+
+    //Falta Loop para se tiver mais clientes
 }
 
 void read_file_cliente_bin(){
@@ -41,6 +43,10 @@ void read_file_cliente_bin(){
         printf("fopen clients.bin failed, exiting now...\n");
         exit(1);
     }
+
+
+    //Falta leitura do ficheiro em binario e loop
+
     fclose(file);
 }
 
@@ -48,7 +54,6 @@ CLIENTE *add_client_head(char * name, char *address, int n_fiscal, int contact, 
     CLIENTE * client = (CLIENTE *)malloc(sizeof(CLIENTE));
     CLIENTE_LISTA * add;
     add = (CLIENTE_LISTA *)realloc((int*)add->nclientes, add->nclientes*sizeof(CLIENTE));
-    DATA nascimento;
     strcpy(client->nome, name);
     strcpy(client->morada, address);
     client->nif = n_fiscal;
@@ -57,8 +62,7 @@ CLIENTE *add_client_head(char * name, char *address, int n_fiscal, int contact, 
     client->nascimento.mes=month;
     client->nascimento.ano=year;
 
-    add_to_tail(client, add);
-    add_to_head(client, add);
+    add_client_to_head(client, add);
     return client;
 }
 
@@ -66,7 +70,6 @@ CLIENTE *add_client_tail(char * name, char *address, int n_fiscal, int contact, 
     CLIENTE *client = (CLIENTE *) malloc(sizeof(CLIENTE));
     CLIENTE_LISTA *add;
     add = (CLIENTE_LISTA *) realloc((int *) add->nclientes, add->nclientes * sizeof(CLIENTE));
-    DATA nascimento;
     strcpy(client->nome, name);
     strcpy(client->morada, address);
     client->nif = n_fiscal;
@@ -75,10 +78,10 @@ CLIENTE *add_client_tail(char * name, char *address, int n_fiscal, int contact, 
     client->nascimento.mes = month;
     client->nascimento.ano = year;
 
-    add_to_tail(client, add);
+    add_client_to_tail(client, add);
 }
 
-void add_to_tail(CLIENTE *client, CLIENTE_LISTA *list){
+void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list){
     if(list->phead==NULL && list->nclientes==0) { // Se não houver elementos inseridos na lista, insere o atual
         list = (CLIENTE_LISTA *) malloc(sizeof(CLIENTE_LISTA));
         list->phead = (CLIENTE *) cliente;
@@ -91,7 +94,7 @@ void add_to_tail(CLIENTE *client, CLIENTE_LISTA *list){
     }
 }
 
-void add_to_head(CLIENTE *client, CLIENTE_LISTA *list){
+void add_client_to_head(CLIENTE *client, CLIENTE_LISTA *list){
     if(list->phead==NULL && list->nclientes==0) { // Se não houver elementos inseridos na lista, insere o atual
         list = (CLIENTE_LISTA *) malloc(sizeof(CLIENTE_LISTA));
         list->phead = (CLIENTE *) cliente;
@@ -104,24 +107,23 @@ void add_to_head(CLIENTE *client, CLIENTE_LISTA *list){
     }
 }
 
-CLIENTE_LISTA * deleteClient(int nif){
-    CLIENTE_LISTA *deleteUser;
+CLIENTE_LISTA * deleteClient(int nif, CLIENTE_LISTA *list){
     CLIENTE * remove;
     CLIENTE * temp;
     int aux = 0;
-    for (aux; aux < deleteUser->nclientes; ++aux) {
+    for (aux; aux < list->nclientes; ++aux) {
         if(remove->nif == nif){
             temp = remove;
             remove->pnext = temp->pnext;
             free(temp);
-            deleteUser->nclientes--;
+            list->nclientes--;
             printf("The user was removed without any issue\n");
-            break;
+            return list;
         }
         else{
             remove = (CLIENTE *) remove->pnext;
         }
     }
     printf("User not found\n");
-    return deleteUser;
+    return list;
 }
