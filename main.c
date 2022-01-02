@@ -6,8 +6,8 @@
 #include "cliente.h"
 
 
-int main() {
-
+int main(int argc, const char * argv[]) {
+    int i = cidade(argc,argv);
+    printf("%d", i);
     return 0;
-
 }

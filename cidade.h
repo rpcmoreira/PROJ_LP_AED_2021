@@ -13,10 +13,12 @@
 
 int cidade(int agrc, const char *argv[]);
 
-void read_file_cidade_txt();
-void read_file_cidade_bin();
+void read_file_cidade_txt(LIST_CIDADES *list);
+void read_file_cidade_bin(LIST_CIDADES *list);
 
-CIDADE * add_city(int id, char *info, double latitude, double longitude);
-LIST_CIDADES* add_city_list(CIDADE *city, LIST_CIDADES *list)
+CIDADE * add_city(int id, char *info, double latitude, double longitude, LIST_CIDADES * newList);
+LIST_CIDADES * add_city_list(CIDADE *city, LIST_CIDADES *list);
+
+void print_linked_cidade(LIST_CIDADES *head);
 
 #endif //PROJ_LP_CIDADE_H

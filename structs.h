@@ -14,7 +14,7 @@ typedef struct coordenadas {
 
 typedef struct poi{         //Place of Interest
     char nome[MAX100];
-    char descricao[MAX250]
+    char descricao[MAX250];
 }POI;
 
 typedef struct array_poi{
