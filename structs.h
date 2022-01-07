@@ -3,6 +3,7 @@
 
 #define MAX100 100
 #define MAX250 250
+#define MAX500 500
 
 typedef struct data{
     int dia, mes, ano;

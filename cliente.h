@@ -7,16 +7,18 @@
 
 #include "structs.h"
 
+void cliente(int argc, const char * argv[]);
+
 void read_file_cliente_txt();
 void read_file_cliente_bin();
 
 
-CLIENTE *add_client_tail(char * name, char *address, int n_fiscal, int contact, int day, int month, int year);
-CLIENTE *add_client_head(char * name, char *address, int n_fiscal, int contact, int day, int month, int year);
+CLIENTE *add_client(char * name, char *address, int n_fiscal, int contact, int day, int month, int year, CLIENTE_LISTA *list);
 
-void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list);
+        void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list);
 void add_client_to_head(CLIENTE *client, CLIENTE_LISTA *list);
 
 CLIENTE_LISTA * deleteClient(int nif, CLIENTE_LISTA *list);
+void print_linked_user(CLIENTE_LISTA *head);
 
 #endif //PROJ_LP_CLIENTE_H

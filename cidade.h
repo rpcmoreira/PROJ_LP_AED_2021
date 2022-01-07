@@ -11,7 +11,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int cidade(int agrc, const char *argv[]);
+void cidade(int agrc, const char *argv[]);
 
 void read_file_cidade_txt(LIST_CIDADES *list);
 void read_file_cidade_bin(LIST_CIDADES *list);

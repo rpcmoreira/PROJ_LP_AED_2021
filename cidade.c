@@ -6,7 +6,7 @@
 
 #define INFO 258
 
-int cidade(int argc, const char * argv[]){
+void cidade(int argc, const char * argv[]){
     //read_file_cidade_txt();
     //read_file_cidade_bin();
     LIST_CIDADES *list = (LIST_CIDADES *)malloc(sizeof(LIST_CIDADES));
@@ -18,7 +18,6 @@ int cidade(int argc, const char * argv[]){
     add_city(4,"FCP 3-1 SLB", 5435434, 123213,list);
     add_city(5,"Sbording", 2313.6, 32331.6,list);
     print_linked_cidade(list);
-    return 0;
 }
 
 void read_file_cidade_txt(LIST_CIDADES *list){

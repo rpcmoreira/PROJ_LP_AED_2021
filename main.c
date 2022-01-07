@@ -7,7 +7,7 @@
 
 
 int main(int argc, const char * argv[]) {
-    int i = cidade(argc,argv);
-    printf("%d", i);
+    //cidade(argc,argv);
+      cliente(argc,argv);
     return 0;
 }
