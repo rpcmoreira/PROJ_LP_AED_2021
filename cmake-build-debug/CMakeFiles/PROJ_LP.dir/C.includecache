@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.c
+cliente.h
+C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.h
+structs.h
+C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+
+C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.h
+structs.h
+C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h
+
+C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h
+
