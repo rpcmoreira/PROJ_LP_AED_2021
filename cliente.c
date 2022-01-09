@@ -305,25 +305,12 @@ void search_nome_client(char *nome, CLIENTE_LISTA * lista){
     client = lista->phead;
     while(client != null){
         if(strcmp(nome, client->nome) == 0){
-            printf("User Encontrado : %s\n\n", nome);
+            printf("\nUser Encontrado : %s\n", nome);
             printf("Morada : %s\n", client->morada);
             printf("NIF : %d\n", client->nif);
             printf("Contacto : %d\n", client->contacto);
             printf("Data : %d/%d/%d\n", client->nascimento.dia, client->nascimento.mes, client->nascimento.ano);
             printf("Realizou %d viagens\n", client->historico_viagens.nviagens);
-            if(client->historico_viagens.nviagens != 0) {
-                for (int i = 0; i < client->historico_viagens.p_viagem[i].ncidades; ++i) {
-                    VIAGEM *vg = (VIAGEM *)malloc(sizeof(VIAGEM));
-                    vg->ncidades = client->historico_viagens.p_viagem[i].ncidades;
-                    CIDADE *cidade = (CIDADE *)malloc(sizeof(CIDADE)*vg->ncidades);
-                    printf("\tViagem n. %d\n", i);
-                    for (int j = 0; j < vg->ncidades; ++j) {
-                        strcpy(cidade->nome , client->historico_viagens.p_viagem[i].city[j].nome);
-                                vg->city = cidade;
-                        printf("\t\t %s\n",vg[i].city[j].nome);
-                    }
-                }
-            }
             break;
         }
         client = (CLIENTE *) client->pnext;
@@ -334,26 +321,13 @@ void search_nif_client(int nif, CLIENTE_LISTA * lista){
     CLIENTE *client = lista->phead;
     while(client != null){
         if(nif == client->nif){
-            printf("User Encontrado : %s\n\n", client->nome);
+            printf("\nUser Encontrado : %s\n", client->nome);
             printf("Morada : %s\n", client->morada);
             printf("NIF : %d\n", client->nif);
             printf("Contacto : %d\n", client->contacto);
             printf("Data : %d/%d/%d\n", client->nascimento.dia, client->nascimento.mes, client->nascimento.ano);
             printf("Realizou %d viagens\n", client->historico_viagens.nviagens);
-            if(client->historico_viagens.nviagens != 0) {
-                for (int i = 0; i < client->historico_viagens.p_viagem[i].ncidades; ++i) {
-                    VIAGEM *vg = (VIAGEM *)malloc(sizeof(VIAGEM));
-                    vg->ncidades = client->historico_viagens.p_viagem[i].ncidades;
-                    CIDADE *cidade = (CIDADE *)malloc(sizeof(CIDADE)*vg->ncidades);
-                    printf("\tViagem n. %d\n", i);
-                    for (int j = 0; j < vg[i].ncidades; ++j) {
-                        strcpy(cidade->nome , client->historico_viagens.p_viagem[i].city[j].nome);
-                        vg->city = cidade;
-                        printf("\t\t %s\n",vg[i].city[j].nome);
-                    }
-                }
-            }
-            break;
+          break;
         }
         client = (CLIENTE *) client->pnext;
     }
