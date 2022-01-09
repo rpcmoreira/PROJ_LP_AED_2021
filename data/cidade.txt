@@ -1,4 +1,4 @@
-3
+4
 Porto,Cidade do Porto,342.1234,5124.321,2
 Torre Clerigos,Torre antiga da cidade do Porto
 Estadio do Dragao,Estadio do Futebol Clube do Porto
@@ -8,3 +8,5 @@ Oceanario de Lisboa,Oceanario pretencente ao Parque das Nacoes
 Shopping Colombo,Maior Centro Comercial do Pais
 Coimbra,Cidade do Coimbra,212,11,1
 Portugal dos Pequenitos,Cidade Miniatura para criancas
+Faro,Algarve,8888.1,2482.3,1
+Estadio do Algarve,Inicio/Fim de etapa do antigo Rali de Portugal

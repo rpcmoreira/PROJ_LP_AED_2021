@@ -13,13 +13,13 @@
 
 void cidade(int agrc, const char *argv[]);
 
-CIDADE * read_file_cidade_txt();
+void read_file_cidade_txt();
 void read_file_cidade_bin(CIDADE *list);
 
 CIDADE * add_city(char *nome, char *descricao, double latitude, double longitude, ARRAY_POI *poi, int pos, CIDADE * list);
 CIDADE * add_city_list(CIDADE *city, CIDADE *list);
 
+void add_City(char *nome, char *descricao, float lat, float log);
 CIDADE search_City(char *name);
-void print_linked_cidade(CIDADE *head);
 
 #endif //PROJ_LP_CIDADE_H

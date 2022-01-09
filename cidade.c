@@ -6,17 +6,19 @@
 #define null NULL
 
 #define INFO 258
-CIDADE * list = NULL;
+CIDADE * list;
 
 void cidade(int argc, const char * argv[]){
+    list = (CIDADE *)malloc(sizeof(CIDADE));
+    list->total = 0;
+    read_file_cidade_txt();
 
-    list = read_file_cidade_txt();
+    //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
 }
 
-CIDADE * read_file_cidade_txt(){
+void read_file_cidade_txt(){
     FILE *file;
-    char nome[MAX100], descricao[MAX100], nome_poi[MAX100], desc_poi[MAX100];
-    float lat,log;
+    char nome_poi[MAX100], desc_poi[MAX100];
     char temp[20];
     int n, tam;
     if ((file = fopen("../data/cidade.txt", "r")) == NULL) {
@@ -25,7 +27,7 @@ CIDADE * read_file_cidade_txt(){
     }
 
     fscanf(file, "%d\n", &tam);
-    CIDADE * list = (CIDADE *)malloc(sizeof(CIDADE)*tam);
+    list = (CIDADE *)realloc(list, sizeof(CIDADE)*tam);
     for (int i = 0; i < tam; ++i) {
         fscanf(file, "%[^,],", list[i].nome);
         fscanf(file, "%[^,],", list[i].descricao);
@@ -35,7 +37,7 @@ CIDADE * read_file_cidade_txt(){
         list[i].cc.lat = atof(temp);
         fscanf(file, "%[^\n]\n", temp);
         n = atoi(temp);
-        list[i].total = tam;
+        list->total = tam;
         ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI)*n);
         arr_poi->n_poi=n;
         for (int j = 0; j < n; ++j) {
@@ -49,7 +51,6 @@ CIDADE * read_file_cidade_txt(){
         list[i].ar_poi = arr_poi;
     }
   fclose(file);
-    return list;
 }
 
 void read_file_cidade_bin(CIDADE *list){
@@ -68,33 +69,6 @@ void read_file_cidade_bin(CIDADE *list){
     //add_city(id, descricao, latitude, longitude, list);
 }
 
-CIDADE * add_city(char *nome, char *descricao, double latitude, double longitude, ARRAY_POI *poi, int pos, CIDADE * list){
-    if(list == NULL){
-        list = (CIDADE *)malloc(sizeof(CIDADE));
-    }else{
-        list = (CIDADE *)realloc(list, sizeof(CIDADE)*pos);
-    }
-    strcpy(list[pos].nome, nome);
-    strcpy(list[pos].descricao, descricao);
-    list[pos].cc.lat = latitude;
-    list[pos].cc.log = longitude;
-    list[pos].ar_poi = poi;
-    list[pos].total = pos;
-    return list;
-}
-
-void print_linked_cidade(CIDADE *head) {
-    for (int i = 0; i < head->total; ++i) {
-        printf("%s\n", head[i].nome);
-        printf("%s\n", head[i].descricao);
-        printf("%lf\n", head[i].cc.log);
-        printf("%lf\n", head[i].cc.lat);
-        for (int j = 0; j < head[i].ar_poi[j].n_poi; ++j) {
-            printf("%s, %s\n", head[i].ar_poi[j].p_poi->nome,head[i].ar_poi[j].p_poi->descricao);
-        }
-    }
-}
-
 CIDADE search_City(char *name){
     for (int i = 0; i < list->total; ++i) {
         if(strcmp(list[i].nome, name) == 0){
@@ -103,4 +77,17 @@ CIDADE search_City(char *name){
     }
     printf("Nao encontrei cidade...\n");
     exit(-1);
+}
+
+void add_City(char *nome, char *descricao, float lat, float log){
+    int n = list->total++;
+    list = (CIDADE*)realloc(list, sizeof(CIDADE)*n);
+    ARRAY_POI * poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI));
+    strcpy(list[n].nome,nome);
+    strcpy(list[n].descricao,descricao);
+    list[n].cc.lat = lat;
+    list[n].cc.log = log;
+    list[n].ar_poi = poi;
+    list[n].ar_poi->n_poi = 0;
+    printf("Cidade %s foi adicionada com sucesso\n", nome);
 }
