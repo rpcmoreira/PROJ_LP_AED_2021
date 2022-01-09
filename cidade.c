@@ -37,11 +37,13 @@ CIDADE * read_file_cidade_txt(){
         n = atoi(temp);
         list[i].total = tam;
         ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI)*n);
+        arr_poi->n_poi=n;
         for (int j = 0; j < n; ++j) {
             POI * poi = (POI *)malloc(sizeof(POI));
             fscanf(file, "%[^,],", nome_poi);
             fscanf(file, "%[^\n]\n", desc_poi);
-
+            strcpy(poi->nome, nome_poi);
+            strcpy(poi->descricao, desc_poi);
             arr_poi[j].p_poi = poi;
         }
         list[i].ar_poi = arr_poi;

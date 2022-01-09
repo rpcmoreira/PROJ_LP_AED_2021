@@ -19,13 +19,17 @@ void cliente(int argc, const char *argv[]) {
     client_list->phead = client_list->ptail = NULL; client_list->nclientes = 0;
     read_file_txt();
     //print_linked_user(list);
+    printf("%s\n", client_list->phead->historico_viagens.p_viagem[0].city[0].nome);
+    printf("%d\n", client_list->phead->historico_viagens.p_viagem[0].city[0].ar_poi[0].n_poi);
+    printf("%s\n", client_list->phead->historico_viagens.p_viagem[0].city[0].ar_poi[0].p_poi[0].nome);
+
 
     //deleteClient(233434321,list);
     //deleteClient(321245675,list);
     //read_file_cliente_bin();
     printf("\n");
     //nif_order(list);
-    print_linked_user(client_list);
+    //print_linked_user(client_list);
 
     //write_file_client_txt(list, "../data/clientes_write.txt");
 }
@@ -69,7 +73,6 @@ CLIENTE_LISTA *read_file_txt() {
                 vg[k].city = city;
             }
             client->historico_viagens.p_viagem = vg;
-            if(n != 0) printf("%s\n", client->historico_viagens.p_viagem[k].city->nome);
         }
 
         add_client_to_head(client, client_list);
