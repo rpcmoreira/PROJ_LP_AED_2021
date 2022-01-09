@@ -3,46 +3,54 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#define null NULL
 
 #define INFO 258
+CIDADE * list = NULL;
 
 void cidade(int argc, const char * argv[]){
-    //read_file_cidade_txt();
-    //read_file_cidade_bin();
-    LIST_CIDADES *list = (LIST_CIDADES *)malloc(sizeof(LIST_CIDADES));
-    list->phead = list->ptail = NULL;
-    list->ncidades = 0;
-    add_city(1,"Porto e uma cidade no norte", 3657.27, 6732.2,list);
-    add_city(2,"Lisboa e uma cidade no centro", 11111.11, 22222.22,list);
-    add_city(3,"Faro e uma cidade no sul", 44444.44, 66666.66,list);
-    add_city(4,"FCP 3-1 SLB", 5435434, 123213,list);
-    add_city(5,"Sbording", 2313.6, 32331.6,list);
-    print_linked_cidade(list);
+
+    list = read_file_cidade_txt();
 }
 
-void read_file_cidade_txt(LIST_CIDADES *list){
-    FILE *file = fopen("../cidade.txt","r");
-    int id;
-    char descricao[INFO];
-    double latitude, longitude;
-
-    if(file == NULL){
-        printf("Failed to open file (txt)\n");
+CIDADE * read_file_cidade_txt(){
+    FILE *file;
+    char nome[MAX100], descricao[MAX100], nome_poi[MAX100], desc_poi[MAX100];
+    float lat,log;
+    char temp[20];
+    int n, tam;
+    if ((file = fopen("../data/cidade.txt", "r")) == NULL) {
+        printf("fopen cidade.txt failed, exiting now...\n");
         exit(-1);
     }
 
-    fscanf(file, "%d", &id);
-    fscanf(file, "%s", descricao);
-    fscanf(file, "%lf", &latitude);
-    fscanf(file, "%lf", &longitude);
-    fclose(file);
+    fscanf(file, "%d\n", &tam);
+    CIDADE * list = (CIDADE *)malloc(sizeof(CIDADE)*tam);
+    for (int i = 0; i < tam; ++i) {
+        fscanf(file, "%[^,],", list[i].nome);
+        fscanf(file, "%[^,],", list[i].descricao);
+        fscanf(file, "%[^,],", temp);
+        list[i].cc.log = atof(temp);
+        fscanf(file, "%[^,],", temp);
+        list[i].cc.lat = atof(temp);
+        fscanf(file, "%[^\n]\n", temp);
+        n = atoi(temp);
+        list[i].total = tam;
+        ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI)*n);
+        for (int j = 0; j < n; ++j) {
+            POI * poi = (POI *)malloc(sizeof(POI));
+            fscanf(file, "%[^,],", nome_poi);
+            fscanf(file, "%[^\n]\n", desc_poi);
 
-    add_city(id, descricao, latitude, longitude, list);
-
-    //Falta Loop para se tiver mais cidade
+            arr_poi[j].p_poi = poi;
+        }
+        list[i].ar_poi = arr_poi;
+    }
+  fclose(file);
+    return list;
 }
 
-void read_file_cidade_bin(LIST_CIDADES *list){
+void read_file_cidade_bin(CIDADE *list){
     FILE *file = fopen("../cidade.txt","rb");
     int id = 0;
     char descricao[INFO];
@@ -55,45 +63,42 @@ void read_file_cidade_bin(LIST_CIDADES *list){
     //Falta leitura do ficheiro em binario e loop
 
     fclose(file);
-    add_city(id, descricao, latitude, longitude, list);
+    //add_city(id, descricao, latitude, longitude, list);
 }
 
-CIDADE * add_city(int id, char *info, double latitude, double longitude, LIST_CIDADES * newList){
-    CIDADE * cidade = (CIDADE *)malloc(sizeof(CIDADE));
-    cidade->id=id;
-    strcpy(cidade->descricao, info);
-    cidade->cc.lat = latitude;
-    cidade->cc.log = longitude;
-
-    add_city_list(cidade, newList);
-    return cidade;
-}
-
-LIST_CIDADES * add_city_list(CIDADE *city, LIST_CIDADES *list) {
-    if(list->phead==NULL && list->ncidades==0) { // Se não houver elementos inseridos na lista, insere o atual
-        list->phead = (CIDADE *) city;
-        list->ptail = (CIDADE *) city;
-        list->ncidades++;
-        city->pnext = NULL;
+CIDADE * add_city(char *nome, char *descricao, double latitude, double longitude, ARRAY_POI *poi, int pos, CIDADE * list){
+    if(list == NULL){
+        list = (CIDADE *)malloc(sizeof(CIDADE));
+    }else{
+        list = (CIDADE *)realloc(list, sizeof(CIDADE)*pos);
     }
-    else{
-        list->ncidades++;
-        list->ptail->pnext = (CIDADE *) city;
-        list->ptail = city;
-        list->ptail->pnext = NULL;
-    }
+    strcpy(list[pos].nome, nome);
+    strcpy(list[pos].descricao, descricao);
+    list[pos].cc.lat = latitude;
+    list[pos].cc.log = longitude;
+    list[pos].ar_poi = poi;
+    list[pos].total = pos;
     return list;
 }
 
-void print_linked_cidade(LIST_CIDADES *head) {
-    LIST_CIDADES *current_node = head;
-    CIDADE *print = (CIDADE *) head->phead;
-    while (print != NULL) {
-        printf("%d\n", print->id);
-        printf("%s\n", print->descricao);
-        printf("%lf\n", print->cc.log);
-        printf("%lf\n", print->cc.lat);
-
-        print = print->pnext;
+void print_linked_cidade(CIDADE *head) {
+    for (int i = 0; i < head->total; ++i) {
+        printf("%s\n", head[i].nome);
+        printf("%s\n", head[i].descricao);
+        printf("%lf\n", head[i].cc.log);
+        printf("%lf\n", head[i].cc.lat);
+        for (int j = 0; j < head[i].ar_poi[j].n_poi; ++j) {
+            printf("%s, %s\n", head[i].ar_poi[j].p_poi->nome,head[i].ar_poi[j].p_poi->descricao);
+        }
     }
+}
+
+CIDADE search_City(char *name){
+    for (int i = 0; i < list->total; ++i) {
+        if(strcmp(list[i].nome, name) == 0){
+            return list[i];
+        }
+    }
+    printf("Nao encontrei cidade...\n");
+    exit(-1);
 }

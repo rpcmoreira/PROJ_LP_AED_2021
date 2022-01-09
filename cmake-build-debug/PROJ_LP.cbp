@@ -8,102 +8,102 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="PROJ_LP">
-				<Option output="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/PROJ_LP.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug"/>
+				<Option output="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/PROJ_LP.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+					<Add directory="C:/Users/Rui/Desktop/mingw/include"/>
+					<Add directory="c:\users\rui\desktop\mingw\bin\../lib/gcc/i686-w64-mingw32/4.8.3/include"/>
+					<Add directory="c:\users\rui\desktop\mingw\bin\../lib/gcc/i686-w64-mingw32/4.8.3/include-fixed"/>
+					<Add directory="c:\users\rui\desktop\mingw\bin\../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 PROJ_LP"/>
-					<CompileFile command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 PROJ_LP"/>
+					<CompileFile command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="PROJ_LP/fast">
-				<Option output="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/PROJ_LP.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug"/>
+				<Option output="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/PROJ_LP.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
-					<Add directory="c:\users\rpcar\desktop\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+					<Add directory="C:/Users/Rui/Desktop/mingw/include"/>
+					<Add directory="c:\users\rui\desktop\mingw\bin\../lib/gcc/i686-w64-mingw32/4.8.3/include"/>
+					<Add directory="c:\users\rui\desktop\mingw\bin\../lib/gcc/i686-w64-mingw32/4.8.3/include-fixed"/>
+					<Add directory="c:\users\rui\desktop\mingw\bin\../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 PROJ_LP/fast"/>
-					<CompileFile command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 PROJ_LP/fast"/>
+					<CompileFile command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug"/>
+				<Option working_dir="C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/Users/rpcar/Desktop/MINGW/bin/mingw32-make.exe -f &quot;C:/Users/rpcar/CLionProjects/PROJ_LP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/Rui/Desktop/mingw/bin/mingw32-make.exe -f &quot;C:/Users/Rui/CLionProjects/ProjetoLP/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/cidade.c">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/cidade.c">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/cidade.h">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.c">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/cliente.c">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.h">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/funct.h">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/funct.h">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/main.c">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/main.c">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/structs.h">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/viagem.c">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/viagem.c">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/viagem.h">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/viagem.h">
 			<Option target="PROJ_LP"/>
 		</Unit>
-		<Unit filename="C:/Users/rpcar/CLionProjects/PROJ_LP/CMakeLists.txt">
+		<Unit filename="C:/Users/Rui/CLionProjects/ProjetoLP/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

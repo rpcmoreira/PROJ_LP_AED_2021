@@ -7,7 +7,7 @@
 
 
 int main(int argc, const char * argv[]) {
-    //cidade(argc,argv);
-      cliente(argc,argv);
+    cidade(argc,argv);
+    cliente(argc,argv);
     return 0;
 }

@@ -1,0 +1,10 @@
+3
+Porto,Cidade do Porto,342.1234,5124.321,2
+Torre Clerigos,Torre antiga da cidade do Porto
+Estadio do Dragao,Estadio do Futebol Clube do Porto
+Lisboa,Cidade do Lisboa,421.11,123.12,3
+Parque das Nacoes,Complexo construido para a Expo98
+Oceanario de Lisboa,Oceanario pretencente ao Parque das Nacoes
+Shopping Colombo,Maior Centro Comercial do Pais
+Coimbra,Cidade do Coimbra,212,11,1
+Portugal dos Pequenitos,Cidade Miniatura para criancas

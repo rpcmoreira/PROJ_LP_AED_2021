@@ -14,8 +14,8 @@ typedef struct coordenadas {
 }COORDENADAS;
 
 typedef struct poi{         //Place of Interest
-    char nome[MAX100];
-    char descricao[MAX250];
+    char *nome;
+    char *descricao;
 }POI;
 
 typedef struct array_poi{
@@ -24,28 +24,16 @@ typedef struct array_poi{
 }ARRAY_POI;
 
 typedef struct cidade{      //Gene
-    int id;                 //Cidade
+    char nome[MAX250];                 //Cidade
     char descricao[MAX250];
     COORDENADAS cc;
-    ARRAY_POI ar_poi;
-    struct cidade *pnext;
+    ARRAY_POI *ar_poi;
+    int total;
 }CIDADE;
 
-typedef struct list_cidades{
-    CIDADE *phead;
-    CIDADE *ptail;
-    int ncidades;
-} LIST_CIDADES;
-
-typedef struct ar_id_cidade{
-    int *p_city;
-    int nids;
-} AR_ID_CIDADE;
-
 typedef struct viagem {
-    AR_ID_CIDADE lista_cidade;
-    DATA begin_viagem;
-    DATA end_viagem;
+    CIDADE *city;
+    int ncidades;
 } VIAGEM;
 
 typedef struct historico_viagens {

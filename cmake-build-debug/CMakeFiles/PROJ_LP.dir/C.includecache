@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.c
-cliente.h
-C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.h
+C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
+cidade.h
+C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
 structs.h
-C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h
+C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
 stdio.h
 -
 string.h
@@ -18,9 +18,23 @@ string.h
 stdlib.h
 -
 
-C:/Users/rpcar/CLionProjects/PROJ_LP/cliente.h
+C:/Users/Rui/CLionProjects/ProjetoLP/cliente.c
+cliente.h
+C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h
 structs.h
-C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h
+C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
+cidade.h
+C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
 
-C:/Users/rpcar/CLionProjects/PROJ_LP/structs.h
+C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h
+structs.h
+C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
+
+C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
 
