@@ -32,9 +32,8 @@ void cliente(int argc, const char *argv[]) {
 
 CLIENTE_LISTA *read_file_txt() {
     FILE *file;
-    char line[MAX500], nome_cidade[MAX100], descricao[MAX100], nome_poi[MAX100], desc_poi[MAX100], name[MAX100], address[MAX100], temp[20];;
-    int n_fiscal, contact, day, month, year, n;
-    int tam, tem, tim;
+    char nome_cidade[MAX100],temp[20];
+    int tam, tem, tim,n;
     if ((file = fopen("../data/clientes.txt", "r")) == NULL) {
         printf("fopen clients.txt failed, exiting now...\n");
         exit(-1);
