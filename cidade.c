@@ -19,9 +19,16 @@ void cidade(int argc, const char * argv[]){
 
     //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
 
-    //add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
+    //add_poi(list, "Faro", "Castelo de Lamego", "Castelo da Cidade de Lamego");
     //delete_poi(list, "Lisboa", "Oceanario de Lisboa");
-    search_poi(list, "Estadio do Dragao");
+
+    //search_poi(list, "Estadio do Dragao");
+    //search_poi_cidade(list, "Lisboa");
+
+    print_city();
+
+    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
+    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
 
     print_city();
 
@@ -41,6 +48,7 @@ void read_file_cidade_txt(){
 
     fscanf(file, "%d\n", &tam);
     list = (CIDADE *)realloc(list, sizeof(CIDADE)*tam);
+
     for (int i = 0; i < tam; ++i) {
         fscanf(file, "%[^,],", list[i].nome);
         fscanf(file, "%[^,],", list[i].descricao);
@@ -61,16 +69,17 @@ void read_file_cidade_txt(){
             strcpy(poi->descricao, desc_poi);
             arr_poi[j].p_poi = poi;
         }
+
         list[i].ar_poi = arr_poi;
+
     }
-  fclose(file);
+    fclose(file);
 }
 
 void read_file_cidade_bin(CIDADE *list){
+
     FILE *file = fopen("../cidade.txt","rb");
-    int id = 0;
-    char descricao[INFO];
-    double latitude, longitude;
+
     if(file==NULL){
         printf("Error Failed to open file (bin)\n");
         exit(-1);
@@ -106,9 +115,8 @@ void add_City(char *nome, char *descricao, float lat, float log){
 }
 
 void print_city(){
-    printf("%d\n\n",list->total);
     for (int i = 0; i < list->total; ++i) {
-        printf("\nCidade : %s\n", list[i].nome);
+        printf("\n\nCidade : %s\n", list[i].nome);
         printf("Descricao : %s\n", list[i].descricao);
         printf("Latitude : %f\n", list[i].cc.lat);
         printf("Longitude : %f\n", list[i].cc.log);
@@ -117,6 +125,25 @@ void print_city(){
         for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
             printf("\t %s \t ", list[i].ar_poi[j].p_poi->nome);
             printf("%s \n ", list[i].ar_poi[j].p_poi->descricao);
+        }
+    }
+}
+
+void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, int type){
+    for (int i = 0; i < city->total; ++i) {
+        if(strcmp(city[i].nome, cidade) == 0){
+            switch (type) {
+                case 0:
+                    strcpy(city[i].descricao, desc);
+                    return;
+
+                case 1:
+                    city[i].cc.log = log;
+                    city[i].cc.lat = lat;
+                    return;
+
+                default: printf("Error in city_edit"); return;
+            }
         }
     }
 }

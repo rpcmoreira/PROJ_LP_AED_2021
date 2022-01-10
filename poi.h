@@ -17,5 +17,5 @@
 void add_poi(CIDADE *list, char *nome, char *poi_nome, char *descricao);
 void delete_poi(CIDADE *list, char *nome, char *poi_nome);
 void search_poi(CIDADE *list, char *poi_nome);
-
+void search_poi_cidade(CIDADE *list, char *cidade);
 #endif //PROJ_LP_POI_H

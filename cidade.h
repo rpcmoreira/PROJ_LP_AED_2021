@@ -22,6 +22,9 @@ CIDADE * add_city(char *nome, char *descricao, double latitude, double longitude
 CIDADE * add_city_list(CIDADE *city, CIDADE *list);
 
 void add_City(char *nome, char *descricao, float lat, float log);
+void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, int type);
+
+
 CIDADE search_City(char *name);
 void print_city();
 

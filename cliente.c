@@ -27,8 +27,9 @@ void cliente(int argc, const char *argv[]) {
     //nif_order(client_list);
     //name_order(client_list);
 
-    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
-    //deleteClient(197654234, client_list);      //Carla Dias
+    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);       //Carla Dias
+
+    //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
     //add_viagem(client_list, "Ana Moreira");
     //add_viagem(client_list, "Carla Dias");
