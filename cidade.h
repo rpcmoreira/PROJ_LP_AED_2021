@@ -26,6 +26,7 @@ void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, 
 
 
 CIDADE search_City(char *name);
-void print_city();
+void print_all_city();
+void print_city(char *city);
 
 #endif //PROJ_LP_CIDADE_H
