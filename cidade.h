@@ -6,6 +6,8 @@
 #define PROJ_LP_CIDADE_H
 
 #include "cidade.h"
+#include "viagem.h"
+#include "cliente.h"
 #include "structs.h"
 #include <stdio.h>
 #include <string.h>

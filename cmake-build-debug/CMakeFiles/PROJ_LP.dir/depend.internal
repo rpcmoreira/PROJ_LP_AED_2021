@@ -4,12 +4,15 @@
 CMakeFiles/PROJ_LP.dir/cidade.c.obj
  C:/Users/Rui/CLionProjects/ProjetoLP/cidade.c
  C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
+ C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h
  C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
+ C:/Users/Rui/CLionProjects/ProjetoLP/viagem.h
 CMakeFiles/PROJ_LP.dir/cliente.c.obj
  C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
  C:/Users/Rui/CLionProjects/ProjetoLP/cliente.c
  C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h
  C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
+ C:/Users/Rui/CLionProjects/ProjetoLP/viagem.h
 CMakeFiles/PROJ_LP.dir/main.c.obj
  C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
  C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h
@@ -18,5 +21,8 @@ CMakeFiles/PROJ_LP.dir/main.c.obj
  C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
  C:/Users/Rui/CLionProjects/ProjetoLP/viagem.h
 CMakeFiles/PROJ_LP.dir/viagem.c.obj
+ C:/Users/Rui/CLionProjects/ProjetoLP/cidade.h
+ C:/Users/Rui/CLionProjects/ProjetoLP/cliente.h
+ C:/Users/Rui/CLionProjects/ProjetoLP/structs.h
  C:/Users/Rui/CLionProjects/ProjetoLP/viagem.c
  C:/Users/Rui/CLionProjects/ProjetoLP/viagem.h

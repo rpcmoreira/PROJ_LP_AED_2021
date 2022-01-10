@@ -5,7 +5,13 @@
 #ifndef PROJ_LP_CLIENTE_H
 #define PROJ_LP_CLIENTE_H
 
+#include "cidade.h"
+#include "viagem.h"
+#include "cliente.h"
 #include "structs.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 void cliente(int argc, const char * argv[]);
 

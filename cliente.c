@@ -1,8 +1,6 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cert-err34-c"
-
 #include "cliente.h"
 #include "structs.h"
+#include "viagem.h"
 #include "cidade.h"
 #include <stdio.h>
 #include <string.h>
@@ -16,40 +14,29 @@ CLIENTE_LISTA *client_list;
 
 void cliente(int argc, const char *argv[]) {
     client_list = (CLIENTE_LISTA *)malloc(sizeof(CLIENTE_LISTA));
-    CLIENTE *teste;
     client_list->phead = client_list->ptail = NULL; client_list->nclientes = 0;
-
     read_file_txt();
-
-
     printf("\n");
 
-    print_linked_user();
+    //print_linked_user();
 
-    search_nome_client("Carla Dias", client_list);
-    search_nif_client(209543828, client_list);
+    //search_nome_client("Eduardo Ferreira", client_list);
+    //search_nif_client(209543828, client_list);
+
     //nif_order(client_list);
     //name_order(client_list);
 
-    //add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
+    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);      //Carla Dias
+
+    add_viagem(client_list, "Ana Moreira");
+    add_viagem(client_list, "Carla Dias");
+    //delete_viagem(client_list, "Eduardo Ferreira");
 
     printf("\n");
 
     print_linked_user();
 
-
-
-    /*teste = client_list->phead;
-    while (teste != null) {
-        if(teste->historico_viagens.nviagens != 0) {
-            printf("%s\n", teste->historico_viagens.p_viagem[0].city[0].nome);
-            printf("%d\n", teste->historico_viagens.p_viagem[0].city[0].ar_poi[0].n_poi);
-            printf("%s\n", teste->historico_viagens.p_viagem[0].city[0].ar_poi[0].p_poi[0].nome);
-            printf("%s\n\n", teste->historico_viagens.p_viagem[0].city[0].ar_poi[0].p_poi[0].descricao);
-        }
-        teste = (CLIENTE *) teste->pnext;
-    }*/
     //write_file_client_txt(list, "../data/clientes_write.txt");
 }
 
@@ -83,10 +70,9 @@ CLIENTE_LISTA *read_file_txt() {
         VIAGEM *vg = (VIAGEM *)malloc(sizeof(VIAGEM) * n);
         for (int k = 0; k < n; ++k) {
             fscanf(file, "%d\n", &tem);
-            vg->ncidades = tem;
+            vg[k].ncidades = tem;
             CIDADE * city = (CIDADE *)malloc(sizeof(CIDADE)*tem);
             for (int j = 0; j < tem; ++j) {
-
                 fscanf(file, "%[^\n]\n", nome_cidade);
                 city[j] = search_City(nome_cidade);
                 vg[k].city = city;
@@ -125,6 +111,7 @@ CLIENTE * add_client(char *name, char *address, int n_fiscal, int contact, int d
     client->nascimento.mes = month;
     client->nascimento.ano = year;
     client->historico_viagens.nviagens = 0;
+    client->historico_viagens.p_viagem = NULL;
     client->pnext = null;
     //add_client_to_head(client, list);
     add_client_to_tail(client, list);
@@ -192,8 +179,22 @@ CLIENTE_LISTA *deleteClient(int nif, CLIENTE_LISTA *list) {
 
 void print_linked_user() {
     CLIENTE *teste = client_list->phead;
-    while (teste != null) {
-        printf("%s\n", teste->nome);
+    while(teste != null){
+            printf("\nUser Encontrado : %s\n", teste);
+            printf("Morada : %s\n", teste->morada);
+            printf("NIF : %d\n", teste->nif);
+            printf("Contacto : %d\n", teste->contacto);
+            printf("Data : %d/%d/%d\n", teste->nascimento.dia, teste->nascimento.mes, teste->nascimento.ano);
+            printf("Realizou %d viagens\n", teste->historico_viagens.nviagens);
+            for (int i = 0; i < teste->historico_viagens.nviagens; ++i) {
+                VIAGEM *vg = teste->historico_viagens.p_viagem;
+                for (int j = 0; j < vg[i].ncidades; ++j) {
+                    printf("%s\n", vg[i].city[j].nome);
+                }
+                printf("\n");
+            }
+
+        printf("\n");
         teste = (CLIENTE *) teste->pnext;
     }
 }
@@ -301,7 +302,7 @@ void name_order(CLIENTE_LISTA *list){
 }
 
 void search_nome_client(char *nome, CLIENTE_LISTA * lista){
-    CLIENTE *client = (CLIENTE *)malloc(sizeof(CLIENTE));
+    CLIENTE *client;
     client = lista->phead;
     while(client != null){
         if(strcmp(nome, client->nome) == 0){
@@ -311,8 +312,16 @@ void search_nome_client(char *nome, CLIENTE_LISTA * lista){
             printf("Contacto : %d\n", client->contacto);
             printf("Data : %d/%d/%d\n", client->nascimento.dia, client->nascimento.mes, client->nascimento.ano);
             printf("Realizou %d viagens\n", client->historico_viagens.nviagens);
+            for (int i = 0; i < client->historico_viagens.nviagens; ++i) {
+                VIAGEM *vg = client->historico_viagens.p_viagem;
+                for (int j = 0; j < vg[i].ncidades; ++j) {
+                    printf("%s\n", vg[i].city[j].nome);
+                }
+                printf("\n");
+            }
             break;
         }
+        printf("\n");
         client = (CLIENTE *) client->pnext;
     }
 }
