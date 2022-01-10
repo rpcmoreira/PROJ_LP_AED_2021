@@ -16,5 +16,6 @@
 CLIENTE_LISTA * add_viagem(CLIENTE_LISTA *list, char *nome);
 CLIENTE_LISTA * delete_viagem(CLIENTE_LISTA *list, char *nome);
 
+CLIENTE_LISTA * edit_Viagem(CLIENTE_LISTA *list, char *nome, char *Cidade, int n, int type);
 
 #endif //PROJ_LP_VIAGEM_H

@@ -70,3 +70,36 @@ CLIENTE_LISTA * delete_viagem(CLIENTE_LISTA *list, char *nome){
     }
     return list;
 }
+
+CLIENTE_LISTA * edit_Viagem(CLIENTE_LISTA *list, char *nome, char *cidade, int n, int type){
+    CLIENTE *cliente = list->phead;
+    CIDADE city = search_City(cidade);
+    while(cliente != NULL) {
+        if (strcmp(nome, cliente->nome) == 0) {
+            break;
+        }
+        cliente = (CLIENTE *) cliente->pnext;
+    }
+    if(type == 0){
+        printf("%d\n", cliente->historico_viagens.p_viagem[n].ncidades);
+        cliente->historico_viagens.p_viagem[n].ncidades++;
+        realloc(cliente->historico_viagens.p_viagem[n].city, cliente->historico_viagens.p_viagem[n].ncidades);
+        printf("%d\n", cliente->historico_viagens.p_viagem[n].ncidades);
+        cliente->historico_viagens.p_viagem[n].city[cliente->historico_viagens.p_viagem[n].ncidades - 1] = city;
+
+        return list;
+    }
+    else if(type == 1){                                                                   //EDITAR VIAGEM; REMOVE A FUNCIONAR CORRETAMENTE
+        for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
+            if(strcmp(city.nome, cliente->historico_viagens.p_viagem[n].city[i].nome) == 0){
+                for (int j = i; j < cliente->historico_viagens.nviagens; ++j) {
+                    cliente->historico_viagens.p_viagem[i].city[j] = cliente->historico_viagens.p_viagem[i].city[j+1];
+                }
+                cliente->historico_viagens.p_viagem[n].ncidades--;
+                cliente->historico_viagens.p_viagem[i].city = realloc(cliente->historico_viagens.p_viagem[i].city, sizeof(CIDADE)*cliente->historico_viagens.p_viagem[n].ncidades);
+                return list;
+            }
+        }
+    }
+    else printf("Type Error!\n");
+}

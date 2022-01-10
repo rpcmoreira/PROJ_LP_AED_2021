@@ -31,7 +31,8 @@ void cliente(int argc, const char *argv[]) {
 
     //add_viagem(client_list, "Ana Moreira");
     //add_viagem(client_list, "Carla Dias");
-    delete_viagem(client_list, "Eduardo Ferreira");
+    //delete_viagem(client_list, "Eduardo Ferreira");
+    client_list = edit_Viagem(client_list, "Eduardo Ferreira", "Coimbra", 1, 1);
 
     printf("\n");
 
@@ -188,6 +189,7 @@ void print_linked_user() {
             printf("Realizou %d viagens\n", teste->historico_viagens.nviagens);
             for (int i = 0; i < teste->historico_viagens.nviagens; ++i) {
                 VIAGEM *vg = teste->historico_viagens.p_viagem;
+                printf("%d\n", vg[i].ncidades);
                 for (int j = 0; j < vg[i].ncidades; ++j) {
                     printf("%s\n", vg[i].city[j].nome);
                 }
