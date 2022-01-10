@@ -1,7 +1,8 @@
+#include "poi.h"
+#include "cidade.h"
+#include "viagem.h"
 #include "cliente.h"
 #include "structs.h"
-#include "viagem.h"
-#include "cidade.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -31,12 +32,16 @@ void cliente(int argc, const char *argv[]) {
 
     //add_viagem(client_list, "Ana Moreira");
     //add_viagem(client_list, "Carla Dias");
+
     //delete_viagem(client_list, "Eduardo Ferreira");
-    client_list = edit_Viagem(client_list, "Eduardo Ferreira", "Coimbra", 1, 1);
+
+    //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 1, 1);
+
+    //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
 
     printf("\n");
 
-    print_linked_user();
+    //print_linked_user();
 
     //write_file_client_txt(list, "../data/clientes_write.txt");
 }
@@ -181,7 +186,7 @@ CLIENTE_LISTA *deleteClient(int nif, CLIENTE_LISTA *list) {
 void print_linked_user() {
     CLIENTE *teste = client_list->phead;
     while(teste != null){
-            printf("\nUser Encontrado : %s\n", teste);
+            printf("\nUser Encontrado : %s\n", teste->nome);
             printf("Morada : %s\n", teste->morada);
             printf("NIF : %d\n", teste->nif);
             printf("Contacto : %d\n", teste->contacto);
