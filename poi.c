@@ -63,21 +63,21 @@ void search_poi(CIDADE *list, char *poi_nome) {                                 
                 printf("Found a PoI named %s\n", poi_nome);
                 printf("Belongs to the city of %s\n", list[j].nome);
                 printf("%s\n\n", list[j].ar_poi[i].p_poi->descricao);
-                break;
+                return;
             }
         }
     }
 }
 
-void search_poi_cidade(CIDADE *list, char *cidade){                                         // Search PoI a funcionar
+void search_poi_cidade(CIDADE *list, char *cidade){                                         // Search PoI a funcionar specific cidade
     for (int j = 0; j < list->total; ++j) {
         for (int i = 0; i < list[j].ar_poi->n_poi; ++i) {
             if (strcmp(cidade, list[j].nome) == 0) {
                 printf("PoI in %s\n", list[j].nome);
-                for (int k = 0; k < list[j].ar_poi->n_poi; ++k) {
+                for (int k = 0; k < list[j].ar_poi->n_poi; ++k){
                     printf("%s \t %s\n", list[j].ar_poi[k].p_poi->nome, list[j].ar_poi[k].p_poi->descricao);
                 }
-                break;
+                return;
             }
         }
     }

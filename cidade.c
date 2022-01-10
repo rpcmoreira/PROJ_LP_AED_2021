@@ -19,20 +19,20 @@ void cidade(int argc, const char * argv[]){
 
     //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
 
-    //add_poi(list, "Faro", "Castelo de Lamego", "Castelo da Cidade de Lamego");
+    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
+    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
+
+    //add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
     //delete_poi(list, "Lisboa", "Oceanario de Lisboa");
 
     //search_poi(list, "Estadio do Dragao");
     //search_poi_cidade(list, "Lisboa");
 
-    print_all_city();
-
-    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
-    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
-
-    print_city("Barcelos");
+    //print_all_city();
 
 
+
+    //print_city("Barcelos");
 
 }
 

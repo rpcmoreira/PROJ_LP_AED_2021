@@ -17,9 +17,6 @@ void cliente(int argc, const char *argv[]) {
     client_list = (CLIENTE_LISTA *)malloc(sizeof(CLIENTE_LISTA));
     client_list->phead = client_list->ptail = NULL; client_list->nclientes = 0;
     read_file_txt();
-    printf("\n");
-
-    //print_linked_user();
 
     //search_nome_client("Eduardo Ferreira", client_list);
     //search_nif_client(209543828, client_list);
@@ -27,24 +24,22 @@ void cliente(int argc, const char *argv[]) {
     //nif_order(client_list);
     //name_order(client_list);
 
-    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);       //Carla Dias
-
+    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
-    //add_viagem(client_list, "Ana Moreira");
-    //add_viagem(client_list, "Carla Dias");
+    //viagem_search("Eduardo Ferreira", client_list, "Lisboa");
 
+    add_viagem(client_list, "Ana Moreira");
+    add_viagem(client_list, "Ana Moreira");
+
+    //add_viagem(client_list, "Carla Dias");
     //delete_viagem(client_list, "Eduardo Ferreira");
+    //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
 
     //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 1, 1);
 
-    //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
-
-    printf("\n");
-
     //print_linked_user();
-
-    //write_file_client_txt(list, "../data/clientes_write.txt");
+    write_file_client_txt(client_list, "../data/clientes_write.txt");
 }
 
 CLIENTE_LISTA *read_file_txt() {
@@ -89,6 +84,27 @@ CLIENTE_LISTA *read_file_txt() {
 
         //add_client_to_head(client, client_list);
         add_client_to_tail(client, client_list);
+    }
+    fclose(file);
+}
+
+void write_file_client_txt(CLIENTE_LISTA *list, char *path) {
+    CLIENTE *temp = list->phead;
+    FILE *file = fopen(path, "w");
+    if (file == NULL) {
+        printf("File for writing failed to open...");
+        exit(-1);
+    }
+    fprintf(file, "%d\n",list->nclientes);
+    while (temp != null){
+        fprintf(file, "%s,%s,%d,%d,%d,%d,%d,%d\n", temp->nome, temp->morada, temp->nif, temp->contacto, temp->nascimento.dia, temp->nascimento.mes, temp->nascimento.ano, temp->historico_viagens.nviagens);
+        for (int i = 0; i < temp->historico_viagens.nviagens; ++i) {
+            fprintf(file, "%d\n", temp->historico_viagens.p_viagem[i].ncidades);
+            for (int j = 0; j < temp->historico_viagens.p_viagem[i].ncidades; ++j) {
+                fprintf(file, "%s\n", temp->historico_viagens.p_viagem[i].city[j].nome);
+            }
+        }
+        temp = (CLIENTE *) temp->pnext;
     }
     fclose(file);
 }
@@ -204,20 +220,6 @@ void print_linked_user() {
 
         printf("\n");
         teste = (CLIENTE *) teste->pnext;
-    }
-}
-
-void write_file_client_txt(CLIENTE_LISTA *list, char *path) {
-    CLIENTE *temp = list->phead;
-    FILE *file = fopen(path, "w");
-    if (file == NULL) {
-        printf("File for writing failed to open...");
-        exit(-1);
-    }
-    for (int i = 0; i < list->nclientes; ++i) {
-        fprintf(file, "%s,%s,%d,%d,%d,%d,%d\n", temp->nome, temp->morada, temp->nif, temp->contacto,
-                temp->nascimento.dia, temp->nascimento.mes, temp->nascimento.ano);
-        temp = (CLIENTE *) temp->pnext;
     }
 }
 
@@ -345,6 +347,28 @@ void search_nif_client(int nif, CLIENTE_LISTA * lista){
             printf("Data : %d/%d/%d\n", client->nascimento.dia, client->nascimento.mes, client->nascimento.ano);
             printf("Realizou %d viagens\n", client->historico_viagens.nviagens);
           break;
+        }
+        client = (CLIENTE *) client->pnext;
+    }
+}
+
+void viagem_search(char *nome, CLIENTE_LISTA *lista, char  *cidade){
+    CLIENTE *client;
+    client = lista->phead;
+    while(client != null){
+        if(strcmp(nome, client->nome) == 0){
+            if(client->historico_viagens.nviagens == 0){
+                printf("Error, user doesnt have trips\n");
+                return;
+            }
+            for (int i = 0; i < client->historico_viagens.nviagens; ++i) {
+                for (int j = 0; j < client->historico_viagens.p_viagem[j].ncidades; ++j) {
+                    if(strcmp(client->historico_viagens.p_viagem[i].city[j].nome,cidade) == 0){
+                        printf("User passou por %s na viagem %d\n", cidade, j);
+                    }
+                }
+            }
+            return;
         }
         client = (CLIENTE *) client->pnext;
     }
