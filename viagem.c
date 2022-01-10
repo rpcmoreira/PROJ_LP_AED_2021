@@ -47,16 +47,24 @@ CLIENTE_LISTA * delete_viagem(CLIENTE_LISTA *list, char *nome){
     CLIENTE *cliente = list->phead;
     while(cliente != NULL){
         if(strcmp(nome, cliente->nome) == 0){
-            HISTORICO_VIAGENS hist_v = cliente->historico_viagens;
-            for (int i = 0; i < hist_v.nviagens; ++i) {
-                printf("\nViagem %d\n", i);
-                VIAGEM *viagem = cliente->historico_viagens.p_viagem;
-                for (int j = 0; j < viagem->ncidades; ++j) {
-                    CIDADE cidade = viagem[i].city[j];
-                    printf("%s - ", cidade.nome);
+            printf("\nUser : %s\n", nome);
+            printf("Realizou %d viagens\n", cliente->historico_viagens.nviagens);
+            for (int i = 0; i < cliente->historico_viagens.nviagens; ++i) {
+                printf("Viagem %d\n", i);
+                VIAGEM *vg = cliente->historico_viagens.p_viagem;
+                for (int j = 0; j < vg[i].ncidades; ++j) {
+                    printf("%s\n", vg[i].city[j].nome);
                 }
+                printf("\n");
             }
-            
+            printf("\n");
+            printf("Que viagem pretende remover?\n");
+            aux = atoi(gets(buff));
+            for (int i = aux; i < cliente->historico_viagens.nviagens; ++i) {
+                cliente->historico_viagens.p_viagem[i] = cliente->historico_viagens.p_viagem[i+1];
+            }
+            cliente->historico_viagens.nviagens--;
+            realloc(cliente->historico_viagens.p_viagem, sizeof(VIAGEM)*cliente->historico_viagens.nviagens);
         }
         cliente = (CLIENTE *) cliente->pnext;
     }

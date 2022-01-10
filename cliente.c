@@ -29,9 +29,9 @@ void cliente(int argc, const char *argv[]) {
     add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);      //Carla Dias
 
-    add_viagem(client_list, "Ana Moreira");
-    add_viagem(client_list, "Carla Dias");
-    //delete_viagem(client_list, "Eduardo Ferreira");
+    //add_viagem(client_list, "Ana Moreira");
+    //add_viagem(client_list, "Carla Dias");
+    delete_viagem(client_list, "Eduardo Ferreira");
 
     printf("\n");
 
