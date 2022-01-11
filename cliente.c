@@ -1,8 +1,4 @@
 #include "poi.h"
-#include "cidade.h"
-#include "viagem.h"
-#include "cliente.h"
-#include "structs.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -20,7 +16,7 @@ void cliente(int argc, const char *argv[]) {
     //read_file_cliente_bin();
 
     //search_nome_client("Eduardo Ferreira", client_list);
-    //search_nif_client(209543828, client_list);
+    //search_nif_client(233434321, client_list);
 
     //nif_order(client_list);
     //name_order(client_list);
@@ -28,24 +24,31 @@ void cliente(int argc, const char *argv[]) {
     //add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
-    //viagem_search("Eduardo Ferreira", client_list, "Lisboa");
+    //viagem_search("Eduardo Ferreira", client_list, "Coimbra");
 
     //add_viagem(client_list, "Ana Moreira");
     //add_viagem(client_list, "Ana Moreira");
-
     //add_viagem(client_list, "Carla Dias");
+
     //delete_viagem(client_list, "Eduardo Ferreira");
     //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
 
-    client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 0, 0);
+    //print_linked_user();
 
-    print_linked_user();
+    //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 0, 0);
+    //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Lisboa", 0, 0);
+    //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Porto", 0, 0);
+    //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Coimbra", 0, 2);
 
-    //write_file_client_txt();
-    //write_file_cliente_bin();
+    //search_City("Barcelos");
+    //generate_Rel("Ana Moreira");
+    //print_linked_user();
+
+    write_file_client_txt();
+    write_file_cliente_bin();
 }
 
-CLIENTE_LISTA *read_file_txt() {
+void read_file_txt() {
     FILE *file;
     char nome_cidade[MAX100],temp[20];
     int tam, tem,n;
@@ -114,29 +117,47 @@ void write_file_client_txt() {
 }
 
 void read_file_cliente_bin() {
-    CLIENTE * cliente = client_list->phead;
     FILE *file;
     if ((file = fopen("../data/clientes.bin", "rb")) == null) {
         printf("fopen clients.bin failed, exiting now...\n");
         exit(1);
     }
-    fwrite(&client_list->nclientes, sizeof(int), 1, file);
-    while (cliente != null){
+    char nome[MAX100], morada[MAX250], cidade[MAX100], desc[MAX250];
+    int cont, nif, n_viagens, n_cidades, n_clientes,dia,mes,ano;
 
-        /*fwrite(cliente->nome, sizeof(cliente->nome), 1, file);
-        fwrite(cliente->morada, sizeof(cliente->morada), 1, file);
-        fwrite(&cliente->nif, sizeof(int), 1, file);
-        fwrite(&cliente->contacto, sizeof(int), 1, file);
-        fwrite(&cliente->historico_viagens.nviagens, sizeof(int), 1, file);
-        for (int i = 0; i < cliente->historico_viagens.nviagens; ++i) {
-            fwrite(&cliente->historico_viagens.p_viagem[i].ncidades, sizeof(int), 1, file);
-            for (int j = 0; j < cliente->historico_viagens.p_viagem[i].ncidades; ++j) {
-                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].nome, sizeof(cliente->historico_viagens.p_viagem[i].city[j].nome), 1, file);
-                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].descricao, sizeof(cliente->historico_viagens.p_viagem[i].city[j].descricao), 1, file);
+    fread(&n_clientes, sizeof(int), 1, file);
+    for (int i = 0; i < n_clientes; ++i) {
+        CLIENTE *client = (CLIENTE *) malloc(sizeof(CLIENTE));
+        fread(&nome, sizeof(strlen(nome)), 1, file);
+        fread(&morada, sizeof(strlen(morada)), 1, file);
+        fread(&nif, sizeof(int), 1, file);
+        fread(&cont, sizeof(int), 1, file);
+        fread(&n_viagens, sizeof(int), 1, file);
+        fread(&dia, sizeof(int), 1, file);
+        fread(&mes, sizeof(int), 1, file);
+        fread(&ano, sizeof(int), 1, file);
+
+        strcpy(client->nome, nome);
+        strcpy(client->morada, morada);
+        client->nif = nif;
+        client->contacto = cont;
+        client->nascimento.dia = dia;
+        client->nascimento.mes = mes;
+        client->nascimento.ano = ano;
+        client->historico_viagens.nviagens = n_viagens;
+
+        VIAGEM *vg = (VIAGEM *)malloc(sizeof(VIAGEM) * n_viagens);
+        for (int j = 0; j < n_viagens; ++j) {
+            fread(&n_cidades, sizeof(int), 1, file);
+            CIDADE * city = (CIDADE *)malloc(sizeof(CIDADE)*n_cidades);
+            for (int k = 0; k < n_cidades; ++k) {
+                fread(&cidade, sizeof(strlen(cidade)), 1, file);
+                city[j] = search_City(cidade);
+                vg[j].city = city;
             }
-        }*/
-        fwrite(&cliente, sizeof(CLIENTE), 1,file);
-        cliente = (CLIENTE *) cliente->pnext;
+            client->historico_viagens.p_viagem = vg;
+        }
+        add_client_to_tail(client, client_list);
     }
     printf("Cidade_bin is finished\n");
     fclose(file);
@@ -151,20 +172,40 @@ void write_file_cliente_bin() {
     }
     fwrite(&client_list->nclientes, sizeof(int), 1, file);
     while (cliente != null){
+        char nome[MAX100], morada[MAX250], cidade[MAX100], desc[MAX250];
+        int cont, nif, n_viagens, n_cidades, dia, mes, ano;
 
-        /*fwrite(cliente->nome, sizeof(cliente->nome), 1, file);
-        fwrite(cliente->morada, sizeof(cliente->morada), 1, file);
-        fwrite(&cliente->nif, sizeof(int), 1, file);
-        fwrite(&cliente->contacto, sizeof(int), 1, file);
-        fwrite(&cliente->historico_viagens.nviagens, sizeof(int), 1, file);
+        strcpy(nome, cliente->nome);
+        strcpy(nome, cliente->nome);
+        cont = cliente->contacto;
+        nif = cliente->nif;
+        n_viagens = cliente->historico_viagens.nviagens;
+        dia = cliente->nascimento.dia;
+        mes = cliente->nascimento.mes;
+        ano = cliente->nascimento.ano;
+
+
+        fwrite(&nome, sizeof(strlen(nome)+1), 1, file);
+        fwrite(&morada, sizeof(strlen(morada)+1), 1, file);
+        fwrite(&nif, sizeof(int), 1, file);
+        fwrite(&cont, sizeof(int), 1, file);
+        fwrite(&dia, sizeof(int), 1, file);
+        fwrite(&mes, sizeof(int), 1, file);
+        fwrite(&ano, sizeof(int), 1, file);
+
+        fwrite(&n_viagens, sizeof(int), 1, file);
         for (int i = 0; i < cliente->historico_viagens.nviagens; ++i) {
-            fwrite(&cliente->historico_viagens.p_viagem[i].ncidades, sizeof(int), 1, file);
+            n_cidades = cliente->historico_viagens.p_viagem[i].ncidades;
+
+            fwrite(&n_cidades, sizeof(int), 1, file);
             for (int j = 0; j < cliente->historico_viagens.p_viagem[i].ncidades; ++j) {
-                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].nome, sizeof(cliente->historico_viagens.p_viagem[i].city[j].nome), 1, file);
-                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].descricao, sizeof(cliente->historico_viagens.p_viagem[i].city[j].descricao), 1, file);
+                strcpy(cidade, cliente->historico_viagens.p_viagem[i].city[j].nome);
+                strcpy(desc, cliente->historico_viagens.p_viagem[i].city[j].descricao);
+
+                fwrite(&cidade, sizeof(strlen(cidade)+1), 1, file);
+                fwrite(&desc, sizeof(strlen(desc)+1), 1, file);
             }
-        }*/
-        fwrite(&cliente, sizeof(CLIENTE), 1,file);
+        }
         cliente = (CLIENTE *) cliente->pnext;
     }
     printf("Cidade_bin is finished\n");
@@ -235,8 +276,8 @@ CLIENTE_LISTA *deleteClient(int nif, CLIENTE_LISTA *list) {
                         list->ptail->pnext = NULL;
                     } else cur->pnext = remove->pnext;
                     list->nclientes--;
+                    printf("%s has been deleted\n", remove->nome);
                     free(remove);
-                    printf("User has been deleted\n");
                     return list;
                 } else cur = (CLIENTE *) cur->pnext;
             }
@@ -257,10 +298,10 @@ void print_linked_user() {
             printf("Data : %d/%d/%d\n", teste->nascimento.dia, teste->nascimento.mes, teste->nascimento.ano);
             printf("Realizou %d viagens\n", teste->historico_viagens.nviagens);
             for (int i = 0; i < teste->historico_viagens.nviagens; ++i) {
-                VIAGEM *vg = teste->historico_viagens.p_viagem;
-                printf("%d\n", vg[i].ncidades);
-                for (int j = 0; j < vg[i].ncidades; ++j) {
-                    printf("%s\n", vg[i].city[j].nome);
+                VIAGEM vg = teste->historico_viagens.p_viagem[i];
+                printf("%d\n", vg.ncidades);
+                for (int j = 0; j < vg.ncidades; ++j) {
+                    printf("%s\n", vg.city[j].nome);
                 }
                 printf("\n");
             }
@@ -370,9 +411,9 @@ void search_nome_client(char *nome, CLIENTE_LISTA * lista){
             printf("Data : %d/%d/%d\n", client->nascimento.dia, client->nascimento.mes, client->nascimento.ano);
             printf("Realizou %d viagens\n", client->historico_viagens.nviagens);
             for (int i = 0; i < client->historico_viagens.nviagens; ++i) {
-                VIAGEM *vg = client->historico_viagens.p_viagem;
-                for (int j = 0; j < vg[i].ncidades; ++j) {
-                    printf("%s\n", vg[i].city[j].nome);
+                VIAGEM vg = client->historico_viagens.p_viagem[i];
+                for (int j = 0; j < vg.ncidades; ++j) {
+                    printf("%s\n", vg.city[j].nome);
                 }
                 printf("\n");
             }
@@ -393,8 +434,16 @@ void search_nif_client(int nif, CLIENTE_LISTA * lista){
             printf("Contacto : %d\n", client->contacto);
             printf("Data : %d/%d/%d\n", client->nascimento.dia, client->nascimento.mes, client->nascimento.ano);
             printf("Realizou %d viagens\n", client->historico_viagens.nviagens);
-          break;
+            for (int i = 0; i < client->historico_viagens.nviagens; ++i) {
+                VIAGEM vg = client->historico_viagens.p_viagem[i];
+                for (int j = 0; j < vg.ncidades; ++j) {
+                    printf("%s\n", vg.city[j].nome);
+                }
+                printf("\n");
+            }
+            break;
         }
+        printf("\n");
         client = (CLIENTE *) client->pnext;
     }
 }
@@ -411,7 +460,7 @@ void viagem_search(char *nome, CLIENTE_LISTA *lista, char  *cidade){
             for (int i = 0; i < client->historico_viagens.nviagens; ++i) {
                 for (int j = 0; j < client->historico_viagens.p_viagem[j].ncidades; ++j) {
                     if(strcmp(client->historico_viagens.p_viagem[i].city[j].nome,cidade) == 0){
-                        printf("User passou por %s na viagem %d\n", cidade, j);
+                        printf("%s passou por %s na viagem %d\n", nome, cidade, i);
                     }
                 }
             }
@@ -419,4 +468,34 @@ void viagem_search(char *nome, CLIENTE_LISTA *lista, char  *cidade){
         }
         client = (CLIENTE *) client->pnext;
     }
+}
+
+void generate_Rel(char *nome){
+    CLIENTE *c = client_list->phead;
+    while(c != null){
+        if(strcmp(c->nome, nome) == 0){
+            char filename[64];
+            sprintf (filename, "../data/%s.txt", c->nome);
+            FILE *file = fopen(filename, "w");
+            if(file == NULL){
+                printf("Rel open error\n");
+                exit(-1);
+            }
+            fprintf(file, "The Person's name is %s and he/she was born in %d/%d/%d\n", c->nome, c->nascimento.dia, c->nascimento.mes, c->nascimento.ano);
+            fprintf(file, "The Person lives in %s\n", c->morada);
+            fprintf(file, "The Person has %d trips made\n\n", c->historico_viagens.nviagens);
+            for (int i = 0; i < c->historico_viagens.nviagens; ++i) {
+                fprintf(file, "\tTrip %d\n", i+1);
+                fprintf(file, "\tThe Person visited: ");
+                for (int j = 0; j < c->historico_viagens.p_viagem[i].ncidades; ++j) {
+                    fprintf(file, "\t\t%s ", c->historico_viagens.p_viagem[i].city[j].nome);
+                }
+            }
+
+            fclose(file);
+            return;
+        }
+        c = (CLIENTE *) c->pnext;
+    }
+    printf("Person Not Found\n");
 }

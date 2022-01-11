@@ -15,8 +15,9 @@
 
 void cliente(int argc, const char * argv[]);
 
-CLIENTE_LISTA * read_file_txt();
+void read_file_txt();
 void read_file_cliente_bin();
+void generate_Rel(char *nome);
 
 void write_file_cliente_bin();
 void write_file_client_txt();

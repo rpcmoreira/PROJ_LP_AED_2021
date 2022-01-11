@@ -57,6 +57,8 @@ void search_poi(CIDADE *list, char *poi_nome) {                                 
             }
         }
     }
+    printf("This PoI doesn't exist on the data\n");
+    return;
 }
 
 void search_poi_cidade(CIDADE *list,
@@ -70,4 +72,5 @@ void search_poi_cidade(CIDADE *list,
                 return;
            }
     }
+    printf("Couldn't find city\n");
 }

@@ -17,24 +17,28 @@ void cidade(int argc, const char * argv[]){
     list->total = 0;
     read_file_cidade_txt();
 
-    add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
+    //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
+    //add_City("Barcelos", "Casa do Gil Vicente e do galo de Barcelos", 20.22f, 20.22f);
 
-    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
-    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
+    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
+    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
 
-    add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
-    add_poi(list, "Lamego", "Capela Nossa Senhora dos Remedios", "Capela da nossa Senhora dos Remedios");
-    add_poi(list, "Porto", "Rotunda Boavista", "Rotunda enorme perto do centro do Porto");
-    delete_poi(list, "Lisboa", "Oceanario de Lisboa");
+    //add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
+    //add_poi(list, "Lamego", "Capela Nossa Senhora dos Remedios", "Capela da nossa Senhora dos Remedios");
+    //add_poi(list, "Barcelos", "Galo de Barcelos", "Galo mais famoso de Portugal");
+    //add_poi(list, "Porto", "Rotunda Boavista", "Rotunda enorme perto do centro do Porto");
 
-    search_poi(list, "Estadio do Dragao");
-    search_poi_cidade(list, "Lisboa");
+    //delete_poi(list, "Lisboa", "Oceanario de Lisboa");
+    //delete_poi(list, "Lisboa", "Parque das Nacoes");
 
-    print_all_city();
+    //search_poi(list, "Estadio do Dragao");
+    //search_poi(list, "Oceanario de Lisboa");
+    //search_poi_cidade(list, "Lisboa");
 
-    print_city("Barcelos");
+    //print_all_city();
+    //print_city("Barcelos");
+
     write_file_cidade_txt();
-
 }
 
 void read_file_cidade_txt(){
