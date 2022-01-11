@@ -37,7 +37,7 @@ void cliente(int argc, const char *argv[]) {
     //delete_viagem(client_list, "Eduardo Ferreira");
     //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
 
-    client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 1, 1);
+    client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 0, 0);
 
     print_linked_user();
 

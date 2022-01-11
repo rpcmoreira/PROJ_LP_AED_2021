@@ -3,7 +3,7 @@ Porto,Cidade do Porto,342.123400,5124.321000,3
 Torre Clerigos,Torre antiga da cidade do Porto
 Estadio do Dragao,Estadio do Futebol Clube do Porto
 Rotunda Boavista,Rotunda enorme perto do centro do Porto
-Lisboa,Cidade do Lisboa,421.110000,123.120000,2
+Lisboa,Esta e a cidade de lisboa, onde o benfica joga,42.419998,42.419998,2
 Parque das Nacoes,Complexo construido para a Expo98
 Shopping Colombo,Maior Centro Comercial do Pais
 Coimbra,Cidade do Coimbra,212.000000,11.000000,1

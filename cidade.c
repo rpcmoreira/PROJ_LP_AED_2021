@@ -19,22 +19,21 @@ void cidade(int argc, const char * argv[]){
 
     add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
 
-    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
-    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
+    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
+    edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
 
     add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
     add_poi(list, "Lamego", "Capela Nossa Senhora dos Remedios", "Capela da nossa Senhora dos Remedios");
     add_poi(list, "Porto", "Rotunda Boavista", "Rotunda enorme perto do centro do Porto");
-
     delete_poi(list, "Lisboa", "Oceanario de Lisboa");
 
-    //search_poi(list, "Estadio do Dragao");
-    //search_poi_cidade(list, "Lisboa");
+    search_poi(list, "Estadio do Dragao");
+    search_poi_cidade(list, "Lisboa");
 
-    //print_all_city();
+    print_all_city();
 
-    //print_city("Barcelos");
-    //write_file_cidade_txt();
+    print_city("Barcelos");
+    write_file_cidade_txt();
 
 }
 
@@ -104,8 +103,8 @@ CIDADE search_City(char *name){
 }
 
 void add_City(char *nome, char *descricao, float lat, float log){
-    int n = list->total++;
-    list = (CIDADE*)realloc(list, sizeof(CIDADE)*n);
+    int n = list->total;
+    list = realloc(list, sizeof(CIDADE)*(n+1));
     list[n].ar_poi = malloc(sizeof(ARRAY_POI));
     strcpy(list[n].nome,nome);
     strcpy(list[n].descricao,descricao);
@@ -113,6 +112,7 @@ void add_City(char *nome, char *descricao, float lat, float log){
     list[n].cc.log = log;
     list[n].ar_poi->n_poi = 0;
     list[n].ar_poi->p_poi = NULL;
+    list->total++;
     printf("Cidade %s foi adicionada com sucesso\n", nome);
 }
 

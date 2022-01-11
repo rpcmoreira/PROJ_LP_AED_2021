@@ -121,11 +121,14 @@ CLIENTE_LISTA *edit_city_Viagem(CLIENTE_LISTA *list, char *nome, char *cidade, i
         cliente = (CLIENTE *) cliente->pnext;
     }
     if (type == 0) {
-        printf("%d\n", cliente->historico_viagens.p_viagem[n].ncidades);
-        cliente->historico_viagens.p_viagem[n].ncidades++;
-        realloc(cliente->historico_viagens.p_viagem[n].city, cliente->historico_viagens.p_viagem[n].ncidades);
-        printf("%d\n", cliente->historico_viagens.p_viagem[n].ncidades);
-        cliente->historico_viagens.p_viagem[n].city[cliente->historico_viagens.p_viagem[n].ncidades - 1] = city;
+        for (int i = 0; i <= cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
+            if(i == n){
+                cliente->historico_viagens.p_viagem[i].ncidades++;
+                cliente->historico_viagens.p_viagem[i].city = realloc(cliente->historico_viagens.p_viagem[i].city, sizeof(CIDADE) * cliente->historico_viagens.p_viagem[i].ncidades);
+                cliente->historico_viagens.p_viagem[i].city[cliente->historico_viagens.p_viagem[i].ncidades - 1] = city;
+                return list;
+            }
+        }
 
         return list;
     } else if (type ==
