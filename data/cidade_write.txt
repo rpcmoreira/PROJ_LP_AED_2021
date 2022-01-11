@@ -1,0 +1,15 @@
+5
+Porto,Cidade do Porto,342.123400,5124.321000,3
+Torre Clerigos,Torre antiga da cidade do Porto
+Estadio do Dragao,Estadio do Futebol Clube do Porto
+Rotunda Boavista,Rotunda enorme perto do centro do Porto
+Lisboa,Cidade do Lisboa,421.110000,123.120000,2
+Parque das Nacoes,Complexo construido para a Expo98
+Shopping Colombo,Maior Centro Comercial do Pais
+Coimbra,Cidade do Coimbra,212.000000,11.000000,1
+Portugal dos Pequenitos,Cidade Miniatura para criancas
+Faro,Algarve,8888.100000,2482.300000,1
+Estadio do Algarve,Inicio/Fim de etapa do antigo Rali de Portugal
+Lamego,Cidade de Lamego,21.120001,43.320000,2
+Castelo de Lamego,Castelo da Cidade de Lamego
+Capela Nossa Senhora dos Remedios,Capela da nossa Senhora dos Remedios

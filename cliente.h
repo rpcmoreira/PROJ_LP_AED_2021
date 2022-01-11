@@ -16,9 +16,10 @@
 void cliente(int argc, const char * argv[]);
 
 CLIENTE_LISTA * read_file_txt();
-
 void read_file_cliente_bin();
-void write_file_client_txt(CLIENTE_LISTA *list, char* path);
+
+void write_file_cliente_bin();
+void write_file_client_txt();
 
 CLIENTE *add_client(char * name, char *address, int n_fiscal, int contact, int day, int month, int year, CLIENTE_LISTA *list);
 CLIENTE_LISTA * deleteClient(int nif, CLIENTE_LISTA *list);

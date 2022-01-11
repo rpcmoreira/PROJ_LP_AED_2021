@@ -17,22 +17,24 @@ void cidade(int argc, const char * argv[]){
     list->total = 0;
     read_file_cidade_txt();
 
-    //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
+    add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
 
     //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
     //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
 
-    //add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
-    //delete_poi(list, "Lisboa", "Oceanario de Lisboa");
+    add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
+    add_poi(list, "Lamego", "Capela Nossa Senhora dos Remedios", "Capela da nossa Senhora dos Remedios");
+    add_poi(list, "Porto", "Rotunda Boavista", "Rotunda enorme perto do centro do Porto");
+
+    delete_poi(list, "Lisboa", "Oceanario de Lisboa");
 
     //search_poi(list, "Estadio do Dragao");
     //search_poi_cidade(list, "Lisboa");
 
     //print_all_city();
 
-
-
     //print_city("Barcelos");
+    //write_file_cidade_txt();
 
 }
 
@@ -59,15 +61,15 @@ void read_file_cidade_txt(){
         fscanf(file, "%[^\n]\n", temp);
         n = atoi(temp);
         list->total = tam;
-        ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI)*n);
+        ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI));
         arr_poi->n_poi=n;
+        POI * poi = (POI *)malloc(sizeof(POI)*n);
         for (int j = 0; j < n; ++j) {
-            POI * poi = (POI *)malloc(sizeof(POI));
             fscanf(file, "%[^,],", nome_poi);
             fscanf(file, "%[^\n]\n", desc_poi);
-            strcpy(poi->nome, nome_poi);
-            strcpy(poi->descricao, desc_poi);
-            arr_poi[j].p_poi = poi;
+            strcpy(poi[j].nome, nome_poi);
+            strcpy(poi[j].descricao, desc_poi);
+            arr_poi->p_poi = poi;
         }
 
         list[i].ar_poi = arr_poi;
@@ -76,7 +78,7 @@ void read_file_cidade_txt(){
     fclose(file);
 }
 
-void read_file_cidade_bin(CIDADE *list){
+void read_file_cidade_bin(){
 
     FILE *file = fopen("../cidade.txt","rb");
 
@@ -123,8 +125,8 @@ void print_all_city(){
 
         printf("Pontos de Interesse (%d)\n", list[i].ar_poi->n_poi);
         for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
-            printf("\t %s \t ", list[i].ar_poi[j].p_poi->nome);
-            printf("%s \n ", list[i].ar_poi[j].p_poi->descricao);
+            printf("\t %s \t ", list[i].ar_poi->p_poi[j].nome);
+            printf("%s \n ", list[i].ar_poi->p_poi[j].descricao);
         }
     }
 }
@@ -139,8 +141,8 @@ void print_city(char *city){
 
             printf("Pontos de Interesse (%d)\n", list[i].ar_poi->n_poi);
             for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
-                printf("\t %s \t ", list[i].ar_poi[j].p_poi->nome);
-                printf("%s \n ", list[i].ar_poi[j].p_poi->descricao);
+                printf("\t %s \t ", list[i].ar_poi->p_poi[j].nome);
+                printf("%s \n ", list[i].ar_poi->p_poi[j].descricao);
             }
             return;
         }
@@ -165,4 +167,21 @@ void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, 
             }
         }
     }
+}
+
+void write_file_cidade_txt(){
+    FILE *file;
+    if ((file = fopen("../data/cidade_write.txt", "w")) == NULL) {
+        printf("fopen cidade.txt failed, exiting now...\n");
+        exit(-1);
+    }
+    fprintf(file, "%d\n", list->total);
+    for (int i = 0; i < list->total; ++i) {
+        fprintf(file,"%s,%s,%f,%f,%d\n",list[i].nome,list[i].descricao,list[i].cc.log,list[i].cc.lat,list[i].ar_poi->n_poi);
+        for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
+            fprintf(file, "%s,%s\n",list[i].ar_poi->p_poi[j].nome,list[i].ar_poi->p_poi[j].descricao);
+        }
+    }
+    printf("Cidade_write is finished\n");
+    fclose(file);
 }

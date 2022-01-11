@@ -1,4 +1,4 @@
-4
+3
 Antonio Brito,Rua das Amoreiras n.75,233434321,932342342,23,5,1995,1
 2
 Lisboa
@@ -13,9 +13,3 @@ Coimbra
 Porto
 Lisboa
 Coimbra
-Ana Moreira,Rua das Verduras n.12,199542361,912345678,27,7,2000,2
-1
-Porto
-2
-Faro
-Lisboa

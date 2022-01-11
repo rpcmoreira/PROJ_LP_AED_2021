@@ -14,22 +14,12 @@
 void add_poi(CIDADE *list, char *nome, char *poi_nome, char *descricao) {
     for (int i = 0; i < list->total; ++i) {
         if (strcmp(list[i].nome, nome) == 0) {
-            for (int j = 0; j <= list[i].ar_poi->n_poi; j++) {
-                if (list[i].ar_poi->n_poi != 0) {
-                    list[i].ar_poi->n_poi++;
-                    list[i].ar_poi->p_poi = (POI *) realloc(list[i].ar_poi->p_poi, sizeof(POI) * list[i].ar_poi->n_poi);
-                } else {
-                    list[i].ar_poi->n_poi++;
-                    list[i].ar_poi->p_poi = (POI *) malloc(sizeof(POI) * list[i].ar_poi->n_poi);
-                }
-
-                POI *poi = malloc(sizeof(POI));
-                strcpy(poi->nome, poi_nome);
-                strcpy(poi->descricao, descricao);
-
-                list[i].ar_poi[j].p_poi = poi;
-                return;
-            }
+            int j = list[i].ar_poi->n_poi;
+            list[i].ar_poi->n_poi++;
+            list[i].ar_poi->p_poi = (POI *) realloc(list[i].ar_poi->p_poi, sizeof(POI) * list[i].ar_poi->n_poi);
+            strcpy(list[i].ar_poi->p_poi[j].nome, poi_nome);
+            strcpy(list[i].ar_poi->p_poi[j].descricao, descricao);
+            return;
         }
     }
     printf("City doesn't exist..\n");
@@ -37,20 +27,20 @@ void add_poi(CIDADE *list, char *nome, char *poi_nome, char *descricao) {
 }
 
 void delete_poi(CIDADE *list, char *nome, char *poi_nome) {
-    int t = 0;
-    for (t; t < list->total; ++t) {
+    int t;
+    for (t = 0; t < list->total; ++t) {
         if (strcmp(list[t].nome, nome) == 0) {
             break;
         }
     }
     for (int i = 0; i < list[i].ar_poi->n_poi; ++i) {
-        if (strcmp(list[t].ar_poi[i].p_poi->nome, poi_nome) == 0) {
+        if (strcmp(list[t].ar_poi->p_poi[i].nome, poi_nome) == 0) {
             for (int j = i; j < list[t].ar_poi->n_poi; ++j) {
-                list[t].ar_poi[j].p_poi = list[t].ar_poi[j + 1].p_poi;
+                list[t].ar_poi->p_poi[j] = list[t].ar_poi->p_poi[j + 1];
             }
 
             list[t].ar_poi->n_poi--;
-            realloc(list[t].ar_poi[i].p_poi, sizeof(POI) * list[t].ar_poi->n_poi);
+            realloc(list[t].ar_poi->p_poi, sizeof(POI) * list[t].ar_poi->n_poi);
             return;
         }
     }
@@ -59,23 +49,24 @@ void delete_poi(CIDADE *list, char *nome, char *poi_nome) {
 void search_poi(CIDADE *list, char *poi_nome) {                                         // Search PoI a funcionar
     for (int j = 0; j < list->total; ++j) {
         for (int i = 0; i < list[j].ar_poi->n_poi; ++i) {
-            if (strcmp(poi_nome, list[j].ar_poi[i].p_poi->nome) == 0) {
+            if (strcmp(poi_nome, list[j].ar_poi->p_poi[i].nome) == 0) {
                 printf("Found a PoI named %s\n", poi_nome);
                 printf("Belongs to the city of %s\n", list[j].nome);
-                printf("%s\n\n", list[j].ar_poi[i].p_poi->descricao);
+                printf("%s\n\n", list[j].ar_poi->p_poi[i].descricao);
                 return;
             }
         }
     }
 }
 
-void search_poi_cidade(CIDADE *list, char *cidade){                                         // Search PoI a funcionar specific cidade
+void search_poi_cidade(CIDADE *list,
+                       char *cidade) {                                         // Search PoI a funcionar specific cidade
     for (int j = 0; j < list->total; ++j) {
         for (int i = 0; i < list[j].ar_poi->n_poi; ++i) {
             if (strcmp(cidade, list[j].nome) == 0) {
                 printf("PoI in %s\n", list[j].nome);
-                for (int k = 0; k < list[j].ar_poi->n_poi; ++k){
-                    printf("%s \t %s\n", list[j].ar_poi[k].p_poi->nome, list[j].ar_poi[k].p_poi->descricao);
+                for (int k = 0; k < list[j].ar_poi->n_poi; ++k) {
+                    printf("%s \t %s\n", list[j].ar_poi->p_poi[i].nome, list[j].ar_poi->p_poi[i].descricao);
                 }
                 return;
             }

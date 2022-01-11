@@ -16,7 +16,10 @@
 void cidade(int agrc, const char *argv[]);
 
 void read_file_cidade_txt();
-void read_file_cidade_bin(CIDADE *list);
+void write_file_cidade_txt();
+
+void read_file_cidade_bin();
+void write_file_cidade_bin();
 
 CIDADE * add_city(char *nome, char *descricao, double latitude, double longitude, ARRAY_POI *poi, int pos, CIDADE * list);
 CIDADE * add_city_list(CIDADE *city, CIDADE *list);

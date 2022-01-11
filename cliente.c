@@ -16,7 +16,8 @@ CLIENTE_LISTA *client_list;
 void cliente(int argc, const char *argv[]) {
     client_list = (CLIENTE_LISTA *)malloc(sizeof(CLIENTE_LISTA));
     client_list->phead = client_list->ptail = NULL; client_list->nclientes = 0;
-    read_file_txt();
+    //read_file_txt();
+    //read_file_cliente_bin();
 
     //search_nome_client("Eduardo Ferreira", client_list);
     //search_nif_client(209543828, client_list);
@@ -24,13 +25,13 @@ void cliente(int argc, const char *argv[]) {
     //nif_order(client_list);
     //name_order(client_list);
 
-    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
+    //add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
     //viagem_search("Eduardo Ferreira", client_list, "Lisboa");
 
-    add_viagem(client_list, "Ana Moreira");
-    add_viagem(client_list, "Ana Moreira");
+    //add_viagem(client_list, "Ana Moreira");
+    //add_viagem(client_list, "Ana Moreira");
 
     //add_viagem(client_list, "Carla Dias");
     //delete_viagem(client_list, "Eduardo Ferreira");
@@ -38,8 +39,10 @@ void cliente(int argc, const char *argv[]) {
 
     //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 1, 1);
 
-    //print_linked_user();
-    write_file_client_txt(client_list, "../data/clientes_write.txt");
+    print_linked_user();
+
+    //write_file_client_txt();
+    //write_file_cliente_bin();
 }
 
 CLIENTE_LISTA *read_file_txt() {
@@ -88,14 +91,14 @@ CLIENTE_LISTA *read_file_txt() {
     fclose(file);
 }
 
-void write_file_client_txt(CLIENTE_LISTA *list, char *path) {
-    CLIENTE *temp = list->phead;
-    FILE *file = fopen(path, "w");
+void write_file_client_txt() {
+    CLIENTE *temp = client_list->phead;
+    FILE *file = fopen("../data/clientes_write.txt", "w");
     if (file == NULL) {
         printf("File for writing failed to open...");
         exit(-1);
     }
-    fprintf(file, "%d\n",list->nclientes);
+    fprintf(file, "%d\n",client_list->nclientes);
     while (temp != null){
         fprintf(file, "%s,%s,%d,%d,%d,%d,%d,%d\n", temp->nome, temp->morada, temp->nif, temp->contacto, temp->nascimento.dia, temp->nascimento.mes, temp->nascimento.ano, temp->historico_viagens.nviagens);
         for (int i = 0; i < temp->historico_viagens.nviagens; ++i) {
@@ -106,21 +109,65 @@ void write_file_client_txt(CLIENTE_LISTA *list, char *path) {
         }
         temp = (CLIENTE *) temp->pnext;
     }
+    printf("Cliente_txt is finished\n");
     fclose(file);
 }
 
 void read_file_cliente_bin() {
+    CLIENTE * cliente = client_list->phead;
     FILE *file;
-    char name[NOME], address[MORADA];
-    int n_fiscal, contact, day, month, year;
-    if ((file = fopen("../clientes.bin", "rb")) == null) {
+    if ((file = fopen("../data/clientes.bin", "rb")) == null) {
         printf("fopen clients.bin failed, exiting now...\n");
         exit(1);
     }
+    fwrite(&client_list->nclientes, sizeof(int), 1, file);
+    while (cliente != null){
 
+        /*fwrite(cliente->nome, sizeof(cliente->nome), 1, file);
+        fwrite(cliente->morada, sizeof(cliente->morada), 1, file);
+        fwrite(&cliente->nif, sizeof(int), 1, file);
+        fwrite(&cliente->contacto, sizeof(int), 1, file);
+        fwrite(&cliente->historico_viagens.nviagens, sizeof(int), 1, file);
+        for (int i = 0; i < cliente->historico_viagens.nviagens; ++i) {
+            fwrite(&cliente->historico_viagens.p_viagem[i].ncidades, sizeof(int), 1, file);
+            for (int j = 0; j < cliente->historico_viagens.p_viagem[i].ncidades; ++j) {
+                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].nome, sizeof(cliente->historico_viagens.p_viagem[i].city[j].nome), 1, file);
+                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].descricao, sizeof(cliente->historico_viagens.p_viagem[i].city[j].descricao), 1, file);
+            }
+        }*/
+        fwrite(&cliente, sizeof(CLIENTE), 1,file);
+        cliente = (CLIENTE *) cliente->pnext;
+    }
+    printf("Cidade_bin is finished\n");
+    fclose(file);
+}
 
-    //Falta leitura do ficheiro em binario e loop
+void write_file_cliente_bin() {
+    CLIENTE * cliente = client_list->phead;
+    FILE *file;
+    if ((file = fopen("../data/clientes.bin", "wb")) == null) {
+        printf("fopen clients.bin failed, exiting now...\n");
+        exit(1);
+    }
+    fwrite(&client_list->nclientes, sizeof(int), 1, file);
+    while (cliente != null){
 
+        /*fwrite(cliente->nome, sizeof(cliente->nome), 1, file);
+        fwrite(cliente->morada, sizeof(cliente->morada), 1, file);
+        fwrite(&cliente->nif, sizeof(int), 1, file);
+        fwrite(&cliente->contacto, sizeof(int), 1, file);
+        fwrite(&cliente->historico_viagens.nviagens, sizeof(int), 1, file);
+        for (int i = 0; i < cliente->historico_viagens.nviagens; ++i) {
+            fwrite(&cliente->historico_viagens.p_viagem[i].ncidades, sizeof(int), 1, file);
+            for (int j = 0; j < cliente->historico_viagens.p_viagem[i].ncidades; ++j) {
+                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].nome, sizeof(cliente->historico_viagens.p_viagem[i].city[j].nome), 1, file);
+                fwrite(&cliente->historico_viagens.p_viagem[i].city[j].descricao, sizeof(cliente->historico_viagens.p_viagem[i].city[j].descricao), 1, file);
+            }
+        }*/
+        fwrite(&cliente, sizeof(CLIENTE), 1,file);
+        cliente = (CLIENTE *) cliente->pnext;
+    }
+    printf("Cidade_bin is finished\n");
     fclose(file);
 }
 
