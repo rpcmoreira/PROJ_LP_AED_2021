@@ -16,7 +16,7 @@ CLIENTE_LISTA *client_list;
 void cliente(int argc, const char *argv[]) {
     client_list = (CLIENTE_LISTA *)malloc(sizeof(CLIENTE_LISTA));
     client_list->phead = client_list->ptail = NULL; client_list->nclientes = 0;
-    //read_file_txt();
+    read_file_txt();
     //read_file_cliente_bin();
 
     //search_nome_client("Eduardo Ferreira", client_list);
@@ -37,7 +37,7 @@ void cliente(int argc, const char *argv[]) {
     //delete_viagem(client_list, "Eduardo Ferreira");
     //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
 
-    //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 1, 1);
+    client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 1, 1);
 
     print_linked_user();
 

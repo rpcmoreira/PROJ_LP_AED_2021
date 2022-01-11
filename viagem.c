@@ -157,4 +157,5 @@ CLIENTE_LISTA *edit_city_Viagem(CLIENTE_LISTA *list, char *nome, char *cidade, i
         printf("Type Error!\n");
         return list;
     }
+    return list;
 }
