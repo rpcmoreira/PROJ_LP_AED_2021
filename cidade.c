@@ -106,6 +106,17 @@ CIDADE search_City(char *name){
     exit(-1);
 }
 
+POI search_Poi(char *poi, char *cidade){
+    for (int i = 0; i < list->total; ++i) {
+        if(strcmp(list[i].nome, cidade) == 0){
+            for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
+                if(strcmp(poi, list[i].ar_poi->p_poi[j].nome) == 0)
+                    return list[i].ar_poi->p_poi[j];
+            }
+        }
+    }
+}
+
 void add_City(char *nome, char *descricao, float lat, float log){
     int n = list->total;
     list = realloc(list, sizeof(CIDADE)*(n+1));

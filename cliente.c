@@ -15,7 +15,7 @@ void cliente(int argc, const char *argv[]) {
     read_file_txt();
     //read_file_cliente_bin();
 
-    //search_nome_client("Eduardo Ferreira", client_list);
+    search_nome_client("Eduardo Ferreira", client_list);
     //search_nif_client(233434321, client_list);
 
     //nif_order(client_list);
@@ -25,14 +25,21 @@ void cliente(int argc, const char *argv[]) {
     //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
     //viagem_search("Eduardo Ferreira", client_list, "Coimbra");
+    //poi_search("Eduardo Ferreira", client_list, "Portugal dos Pequenitos");
+
 
     //add_viagem(client_list, "Ana Moreira");
     //add_viagem(client_list, "Ana Moreira");
     //add_viagem(client_list, "Carla Dias");
 
     //delete_viagem(client_list, "Eduardo Ferreira");
+
     //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
 
+    edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Portugal dos Pequeninos", 0, 1);
+    search_nome_client("Eduardo Ferreira", client_list);
+    edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Portugal dos Pequeninos", 1, 0);
+    search_nome_client("Eduardo Ferreira", client_list);
     //print_linked_user();
 
     //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 0, 0);
@@ -50,8 +57,8 @@ void cliente(int argc, const char *argv[]) {
 
 void read_file_txt() {
     FILE *file;
-    char nome_cidade[MAX100],temp[20];
-    int tam, tem,n;
+    char nome_cidade[MAX100], nome_poi[MAX100],temp[20];
+    int tam, tem,n, n_poi = 0;
     if ((file = fopen("../data/clientes.txt", "r")) == NULL) {
         printf("fopen clients.txt failed, exiting now...\n");
         exit(-1);
@@ -81,8 +88,20 @@ void read_file_txt() {
             vg[k].ncidades = tem;
             CIDADE * city = (CIDADE *)malloc(sizeof(CIDADE)*tem);
             for (int j = 0; j < tem; ++j) {
-                fscanf(file, "%[^\n]\n", nome_cidade);
+                fscanf(file, "%[^,],", nome_cidade);
                 city[j] = search_City(nome_cidade);
+                fscanf(file, "%[^\n]\n", temp);
+                n_poi = atoi(temp);
+                ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI));
+                arr_poi->p_poi = n_poi;
+                POI * poi = (POI *)malloc(sizeof(POI)*n_poi);
+                for (int j = 0; j < n_poi; ++j) {
+                    fscanf(file, "%[^\n]\n", nome_poi);
+                    poi[j] = search_Poi(nome_poi, nome_cidade);
+                    arr_poi->p_poi = poi;
+                }
+
+                city[j].ar_poi = arr_poi;
                 vg[k].city = city;
             }
             client->historico_viagens.p_viagem = vg;
@@ -107,7 +126,10 @@ void write_file_client_txt() {
         for (int i = 0; i < temp->historico_viagens.nviagens; ++i) {
             fprintf(file, "%d\n", temp->historico_viagens.p_viagem[i].ncidades);
             for (int j = 0; j < temp->historico_viagens.p_viagem[i].ncidades; ++j) {
-                fprintf(file, "%s\n", temp->historico_viagens.p_viagem[i].city[j].nome);
+                fprintf(file, "%s,%d\n", temp->historico_viagens.p_viagem[i].city[j].nome, temp->historico_viagens.p_viagem[i].city[j].ar_poi->n_poi);
+                for (int k = 0; k < temp->historico_viagens.p_viagem[i].city[j].ar_poi->n_poi; ++k) {
+                    fprintf(file, "%s\n", temp->historico_viagens.p_viagem[i].city[j].ar_poi->p_poi[k].nome);
+                }
             }
         }
         temp = (CLIENTE *) temp->pnext;
@@ -414,6 +436,9 @@ void search_nome_client(char *nome, CLIENTE_LISTA * lista){
                 VIAGEM vg = client->historico_viagens.p_viagem[i];
                 for (int j = 0; j < vg.ncidades; ++j) {
                     printf("%s\n", vg.city[j].nome);
+                    for (int k = 0; k < vg.city[j].ar_poi->n_poi; ++k) {
+                        printf("%s\n", vg.city[j].ar_poi->p_poi[k].nome);
+                    }
                 }
                 printf("\n");
             }
@@ -461,6 +486,30 @@ void viagem_search(char *nome, CLIENTE_LISTA *lista, char  *cidade){
                 for (int j = 0; j < client->historico_viagens.p_viagem[j].ncidades; ++j) {
                     if(strcmp(client->historico_viagens.p_viagem[i].city[j].nome,cidade) == 0){
                         printf("%s passou por %s na viagem %d\n", nome, cidade, i);
+                    }
+                }
+            }
+            return;
+        }
+        client = (CLIENTE *) client->pnext;
+    }
+}
+
+void poi_search(char *nome, CLIENTE_LISTA *lista, char  *poi){
+    CLIENTE *client;
+    client = lista->phead;
+    while(client != null){
+        if(strcmp(nome, client->nome) == 0){
+            if(client->historico_viagens.nviagens == 0){
+                printf("Error, user doesnt have trips\n");
+                return;
+            }
+            for (int i = 0; i < client->historico_viagens.nviagens; ++i) {
+                for (int j = 0; j < client->historico_viagens.p_viagem[i].ncidades; ++j) {
+                    for (int k = 0; k < client->historico_viagens.p_viagem[i].city[j].ar_poi->n_poi; ++k) {
+                        if(strcmp(poi, client->historico_viagens.p_viagem[i].city[j].ar_poi->p_poi[k].nome) == 0){
+                            printf("%s visitou %s na viagem %d\n", client->nome, poi, i);
+                        }
                     }
                 }
             }

@@ -23,16 +23,18 @@ void write_file_cliente_bin();
 void write_file_client_txt();
 
 CLIENTE *add_client(char * name, char *address, int n_fiscal, int contact, int day, int month, int year, CLIENTE_LISTA *list);
+void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list);
+void add_client_to_head(CLIENTE *client, CLIENTE_LISTA *list);
+
 CLIENTE_LISTA * deleteClient(int nif, CLIENTE_LISTA *list);
 
 void nif_order(CLIENTE_LISTA *list);
 void name_order(CLIENTE_LISTA *list);
 
 void print_linked_user();
-void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list);
-void add_client_to_head(CLIENTE *client, CLIENTE_LISTA *list);
 
 void search_nome_client(char *nome, CLIENTE_LISTA * lista);
 void search_nif_client(int nif, CLIENTE_LISTA * lista);
 void viagem_search(char *nome, CLIENTE_LISTA *lista, char *cidade);
+void poi_search(char *nome, CLIENTE_LISTA *lista, char  *poi);
 #endif //PROJ_LP_CLIENTE_H
