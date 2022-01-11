@@ -34,12 +34,15 @@ void cliente(int argc, const char *argv[]) {
 
     //delete_viagem(client_list, "Eduardo Ferreira");
 
-    //edit_viagem(client_list, "Eduardo Ferreira",0, 2);
+    //edit_viagem(client_list, "Eduardo Ferreira",0, 2);            //Funciona
 
-    edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Portugal dos Pequeninos", 0, 1);
-    search_nome_client("Eduardo Ferreira", client_list);
-    edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Portugal dos Pequeninos", 1, 0);
-    search_nome_client("Eduardo Ferreira", client_list);
+    //edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Portugal dos Pequeninos", 0, 1);       //delete working
+    //search_nome_client("Eduardo Ferreira", client_list);
+    //edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Rio Mondego", 1, 0);
+    //search_nome_client("Eduardo Ferreira", client_list);
+    //edit_poi_Viagem(client_list, "Eduardo Ferreira", "Coimbra", "Portugal dos Pequenitos", 0, 2);
+    //search_nome_client("Eduardo Ferreira", client_list);
+
     //print_linked_user();
 
     //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Faro", 0, 0);
@@ -93,7 +96,7 @@ void read_file_txt() {
                 fscanf(file, "%[^\n]\n", temp);
                 n_poi = atoi(temp);
                 ARRAY_POI * arr_poi = (ARRAY_POI *)malloc(sizeof(ARRAY_POI));
-                arr_poi->p_poi = n_poi;
+                arr_poi->n_poi = n_poi;
                 POI * poi = (POI *)malloc(sizeof(POI)*n_poi);
                 for (int j = 0; j < n_poi; ++j) {
                     fscanf(file, "%[^\n]\n", nome_poi);

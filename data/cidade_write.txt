@@ -1,12 +1,17 @@
-4
-Porto,Cidade do Porto,342.123400,5124.321000,2
+6
+Porto,Cidade do Porto,342.123400,5124.321000,3
 Torre Clerigos,Torre antiga da cidade do Porto
 Estadio do Dragao,Estadio do Futebol Clube do Porto
-Lisboa,Cidade do Lisboa,421.110000,123.120000,3
-Parque das Nacoes,Complexo construido para a Expo98
-Oceanario de Lisboa,Oceanario pretencente ao Parque das Nacoes
+Rotunda Boavista,Rotunda enorme perto do centro do Porto
+Lisboa,Esta e a cidade de lisboa, onde o benfica joga,42.419998,42.419998,1
 Shopping Colombo,Maior Centro Comercial do Pais
-Coimbra,Cidade do Coimbra,212.000000,11.000000,1
+Coimbra,Cidade do Coimbra,212.000000,11.000000,2
 Portugal dos Pequenitos,Cidade Miniatura para criancas
+Rio Mondego,Rio Mondego
 Faro,Algarve,8888.100000,2482.300000,1
 Estadio do Algarve,Inicio/Fim de etapa do antigo Rali de Portugal
+Lamego,Cidade de Lamego,21.120001,43.320000,2
+Castelo de Lamego,Castelo da Cidade de Lamego
+Capela Nossa Senhora dos Remedios,Capela da nossa Senhora dos Remedios
+Barcelos,Casa do Gil Vicente e do galo de Barcelos,20.219999,20.219999,1
+Galo de Barcelos,Galo mais famoso de Portugal

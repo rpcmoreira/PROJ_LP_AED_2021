@@ -6,7 +6,8 @@ Lisboa,Cidade do Lisboa,421.11,123.12,3
 Parque das Nacoes,Complexo construido para a Expo98
 Oceanario de Lisboa,Oceanario pretencente ao Parque das Nacoes
 Shopping Colombo,Maior Centro Comercial do Pais
-Coimbra,Cidade do Coimbra,212,11,1
+Coimbra,Cidade do Coimbra,212,11,2
 Portugal dos Pequenitos,Cidade Miniatura para criancas
+Rio Mondego,Rio Mondego
 Faro,Algarve,8888.1,2482.3,1
 Estadio do Algarve,Inicio/Fim de etapa do antigo Rali de Portugal
