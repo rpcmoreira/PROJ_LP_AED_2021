@@ -61,8 +61,7 @@ void search_poi(CIDADE *list, char *poi_nome) {                                 
     return;
 }
 
-void search_poi_cidade(CIDADE *list,
-                       char *cidade) {                                         // Search PoI a funcionar specific cidade
+void search_poi_cidade(CIDADE *list,char *cidade) {                                         // Search PoI a funcionar specific cidade
     for (int j = 0; j < list->total; ++j) {
             if (strcmp(cidade, list[j].nome) == 0) {
                 printf("PoI in %s\n", list[j].nome);

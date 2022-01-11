@@ -36,10 +36,11 @@ CLIENTE_LISTA *add_viagem(CLIENTE_LISTA *list, char *nome) {
             }
             cliente->historico_viagens.p_viagem[n].city = cidade;
 
-            break;
+            return list;;
         }
         cliente = (CLIENTE *) cliente->pnext;
     }
+    printf("User not found\n");
     return list;
 }
 
@@ -73,10 +74,8 @@ CLIENTE_LISTA *delete_viagem(CLIENTE_LISTA *list, char *nome) {
     return list;
 }
 
-CLIENTE_LISTA *
-edit_viagem(CLIENTE_LISTA *list, char *nome, int n, int n_cidades) {             //EDITAR CIDADES DAS VIAGENS
+CLIENTE_LISTA *edit_viagem(CLIENTE_LISTA *list, char *nome, int n, int n_cidades) {             //EDITAR CIDADES DAS VIAGENS
     char buff[50];
-    int aux;
     CLIENTE *cliente = list->phead;
     while (cliente != NULL) {
         if (strcmp(nome, cliente->nome) == 0) {
@@ -94,12 +93,13 @@ edit_viagem(CLIENTE_LISTA *list, char *nome, int n, int n_cidades) {            
                 printf("Edit should not be used for Deletion, Use Delete Viagem Instead\n");
                 return list;
             }
+
+            cliente->historico_viagens.p_viagem[n].city = (CIDADE *) realloc(cliente->historico_viagens.p_viagem[n].city, sizeof(CIDADE) * n_cidades);
             cliente->historico_viagens.p_viagem[n].ncidades = n_cidades;
-            realloc(cliente->historico_viagens.p_viagem[n].city, sizeof(CIDADE) * n_cidades);
 
             printf("Insira as %d cidades que quer editar para esta viagem - Viagem %d\n", n_cidades, n);
 
-            for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
+            for (int i = 0; i < n_cidades; ++i) {
                 gets(buff);
                 CIDADE city = search_City(buff);
                 cliente->historico_viagens.p_viagem[n].city[i] = city;
@@ -122,24 +122,27 @@ CLIENTE_LISTA *edit_city_Viagem(CLIENTE_LISTA *list, char *nome, char *cidade, i
     }
     if (type == 0) {
         for (int i = 0; i <= cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
-            if(i == n){
+            if (i == n) {
+                int j = cliente->historico_viagens.p_viagem[i].ncidades;
                 cliente->historico_viagens.p_viagem[i].ncidades++;
-                cliente->historico_viagens.p_viagem[i].city = realloc(cliente->historico_viagens.p_viagem[i].city, sizeof(CIDADE) * cliente->historico_viagens.p_viagem[i].ncidades);
-                cliente->historico_viagens.p_viagem[i].city[cliente->historico_viagens.p_viagem[i].ncidades - 1] = city;
+                cliente->historico_viagens.p_viagem[i].city = realloc(cliente->historico_viagens.p_viagem[i].city,
+                                                                      sizeof(CIDADE) *
+                                                                      cliente->historico_viagens.p_viagem[i].ncidades);
+                cliente->historico_viagens.p_viagem[i].city[j] = city;
                 return list;
             }
         }
 
         return list;
     } else if (type ==
-               1) {                                                                                 //EDITAR VIAGEM; REMOVE CIDADE A FUNCIONAR CORRETAMENTE
+               1) {                                                                                             //EDITAR VIAGEM; REMOVE CIDADE A FUNCIONAR CORRETAMENTE
         for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
             if (strcmp(city.nome, cliente->historico_viagens.p_viagem[n].city[i].nome) == 0) {
                 for (int j = i; j < cliente->historico_viagens.nviagens; ++j) {
                     cliente->historico_viagens.p_viagem[i].city[j] = cliente->historico_viagens.p_viagem[i].city[j + 1];
                 }
                 cliente->historico_viagens.p_viagem[n].ncidades--;
-                cliente->historico_viagens.p_viagem[i].city = realloc(cliente->historico_viagens.p_viagem[i].city,
+                cliente->historico_viagens.p_viagem[i].city = (CIDADE *) realloc(cliente->historico_viagens.p_viagem[i].city,
                                                                       sizeof(CIDADE) *
                                                                       cliente->historico_viagens.p_viagem[n].ncidades);
                 return list;
@@ -149,6 +152,69 @@ CLIENTE_LISTA *edit_city_Viagem(CLIENTE_LISTA *list, char *nome, char *cidade, i
                2) {                                                                                //EDITAR VIAGEM; EDITAR CIDADE NA VIAGEM A FUNCIONAR CORRETAMENTE
         for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
             if (strcmp(city.nome, cliente->historico_viagens.p_viagem[n].city[i].nome) == 0) {
+                printf("Pretende Editar %s para que?\n", cidade);
+                gets(buff);
+                CIDADE new = search_City(buff);
+                cliente->historico_viagens.p_viagem[n].city[i] = new;
+                return list;
+            }
+        }
+    } else {
+        printf("Type Error!\n");
+        return list;
+    }
+    return list;
+}
+
+CLIENTE_LISTA *edit_poi_Viagem(CLIENTE_LISTA *list, char *nome, char *cidade, char *poi, int n, int type){
+    char buff[50];
+    CLIENTE *cliente = list->phead;
+    POI p = search_Poi(poi, cidade);
+    while (cliente != NULL) {
+        if (strcmp(nome, cliente->nome) == 0) {
+            break;
+        }
+        cliente = (CLIENTE *) cliente->pnext;
+    }
+    if (type == 0) {                                                                                        //add
+        for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
+                if(strcmp(cidade, cliente->historico_viagens.p_viagem[n].city[i].nome) == 0){
+                    int j = cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi;
+                    if(cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi == 0) {
+                        cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi++;
+                        cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi = (POI *) realloc(
+                                cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi,
+                                sizeof(POI) * cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi);
+                    }else{
+                        cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi++;
+                        cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi = (POI *) malloc(sizeof(POI));
+                    }
+                    cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi[j] = p;
+                    return list;
+                }
+            }
+        return list;
+    } else if (type == 1) {                                                                                             //EDITAR VIAGEM; REMOVE CIDADE A FUNCIONAR CORRETAMENTE
+        for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
+            if (i == n) {
+            if (strcmp(cidade, cliente->historico_viagens.p_viagem[n].city[i].nome) == 0) {
+                for (int j = 0; j < cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi; ++j) {
+                    if(strcmp(cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi[j].nome, poi) == 0){
+                        for (int k = j; k < cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi; ++k) {
+                            cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi[k] = cliente->historico_viagens.p_viagem[n].city[i].ar_poi->p_poi[k+1];
+                        }
+                    }cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi--;
+                    cliente->historico_viagens.p_viagem[i].city[i].ar_poi->p_poi = (POI *) realloc(cliente->historico_viagens.p_viagem[i].city[i].ar_poi->p_poi,
+                                                                                                                             sizeof(POI) *
+                                                                                                                             cliente->historico_viagens.p_viagem[n].city[i].ar_poi->n_poi);
+                    return list;
+                }
+            }
+        }}
+    } else if (type ==
+               2) {                                                                                //EDITAR VIAGEM; EDITAR CIDADE NA VIAGEM A FUNCIONAR CORRETAMENTE
+        for (int i = 0; i < cliente->historico_viagens.p_viagem[n].ncidades; ++i) {
+            if (strcmp(poi, cliente->historico_viagens.p_viagem[n].city[i].nome) == 0) {
                 printf("Pretende Editar %s para que?\n", cidade);
                 gets(buff);
                 CIDADE new = search_City(buff);
