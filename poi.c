@@ -11,6 +11,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+/**
+ * adicionar pois a uma cidade
+ * @param list - array cidades
+ * @param nome - nome cidade
+ * @param poi_nome - nome PoI
+ * @param descricao - Descricao POI
+ */
 void add_poi(CIDADE *list, char *nome, char *poi_nome, char *descricao) {
     for (int i = 0; i < list->total; ++i) {
         if (strcmp(list[i].nome, nome) == 0) {
@@ -26,6 +33,12 @@ void add_poi(CIDADE *list, char *nome, char *poi_nome, char *descricao) {
     exit(-1);
 }
 
+/**
+ * Apaga um poi de uma cidade
+ * @param list - array de cidades
+ * @param nome - nome da cidade
+ * @param poi_nome - nome do poi
+ */
 void delete_poi(CIDADE *list, char *nome, char *poi_nome) {
     int t;
     for (t = 0; t < list->total; ++t) {
@@ -46,6 +59,12 @@ void delete_poi(CIDADE *list, char *nome, char *poi_nome) {
     }
 }
 
+
+/**
+ * Procura um poi
+ * @param list - lista de cidades
+ * @param poi_nome - nome do poi
+ */
 void search_poi(CIDADE *list, char *poi_nome) {                                         // Search PoI a funcionar
     for (int j = 0; j < list->total; ++j) {
         for (int i = 0; i < list[j].ar_poi->n_poi; ++i) {
@@ -58,9 +77,14 @@ void search_poi(CIDADE *list, char *poi_nome) {                                 
         }
     }
     printf("This PoI doesn't exist on the data\n");
-    return;
 }
 
+
+/**
+ * Procura PoIs de uma cidade
+ * @param list - lista cidades
+ * @param cidade - nome cidade
+ */
 void search_poi_cidade(CIDADE *list,char *cidade) {                                         // Search PoI a funcionar specific cidade
     for (int j = 0; j < list->total; ++j) {
             if (strcmp(cidade, list[j].nome) == 0) {

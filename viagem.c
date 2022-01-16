@@ -7,6 +7,13 @@
 #include <string.h>
 #include <stdlib.h>
 
+
+/**
+ * Adiciona uma viagem a um cliente
+ * @param list - Lista de Clientes
+ * @param nome - nome do Cliente
+ * @return
+ */
 CLIENTE_LISTA *add_viagem(CLIENTE_LISTA *list, char *nome) {
     char buff[50];
     int aux;
@@ -46,6 +53,12 @@ CLIENTE_LISTA *add_viagem(CLIENTE_LISTA *list, char *nome) {
     return list;
 }
 
+/**
+ * Apaga uma viagem do cliente
+ * @param list - lista de Clientes
+ * @param nome - nome do cliente
+ * @return
+ */
 CLIENTE_LISTA *delete_viagem(CLIENTE_LISTA *list, char *nome) {
     char buff[50];
     int aux;

@@ -44,7 +44,9 @@ void cidade(int argc, const char * argv[]){
     write_file_cidade_txt();
     //write_file_cidade_bin();
 }
-
+/**
+ * Leitura das Cidades em txt
+ */
 void read_file_cidade_txt(){
     FILE *file;
     char nome_poi[MAX100], desc_poi[MAX100];
@@ -85,6 +87,9 @@ void read_file_cidade_txt(){
     fclose(file);
 }
 
+/**
+ * Ler de bin files
+ */
 void read_file_cidade_bin(){
 
     FILE *file = fopen("../cidade.txt","rb");
@@ -100,6 +105,9 @@ void read_file_cidade_bin(){
     //add_city(id, descricao, latitude, longitude, list);
 }
 
+/**
+ * Escrever para ficheiro bin as cidades
+ */
 void write_file_cidade_bin(){
     FILE *file;
     char nome_poi[MAX100], desc_poi[MAX100];
@@ -125,6 +133,11 @@ void write_file_cidade_bin(){
 }
 
 
+/**
+ * Procura uma cidade pelo nome e devolve a sua informacao
+ * @param name - nome da cidade a procurar
+ * @return
+ */
 CIDADE search_City(char *name){
     for (int i = 0; i < list->total; ++i) {
         if(strcmp(list[i].nome, name) == 0){
@@ -135,6 +148,12 @@ CIDADE search_City(char *name){
     exit(-1);
 }
 
+/**
+ * Procura um poi numa cidade e devolve a sua info
+ * @param poi - ponto a procurar
+ * @param cidade - cidade onde se quer procurar
+ * @return
+ */
 POI search_Poi(char *poi, char *cidade){
     for (int i = 0; i < list->total; ++i) {
         if(strcmp(list[i].nome, cidade) == 0){
@@ -146,6 +165,13 @@ POI search_Poi(char *poi, char *cidade){
     }
 }
 
+/**
+ * adiciona a cidade ao array dinamico das cidades
+ * @param nome - nome da cidade
+ * @param descricao - descricao da cidade
+ * @param lat - latitude
+ * @param log - longitude
+ */
 void add_City(char *nome, char *descricao, float lat, float log){
     int n = list->total;
     list = realloc(list, sizeof(CIDADE)*(n+1));
@@ -160,6 +186,9 @@ void add_City(char *nome, char *descricao, float lat, float log){
     printf("Cidade %s foi adicionada com sucesso\n", nome);
 }
 
+/**
+ * imprime todas as cidades e os seus POIS
+ */
 void print_all_city(){
     for (int i = 0; i < list->total; ++i) {
         printf("\n\nCidade : %s\n", list[i].nome);
@@ -175,6 +204,10 @@ void print_all_city(){
     }
 }
 
+/**
+ * imprime uma cidade especifica
+ * @param city - nome da cidade a imprimir
+ */
 void print_city(char *city){
     for (int i = 0; i < list->total; ++i) {
         if(strcmp(city, list[i].nome) == 0) {
@@ -194,6 +227,15 @@ void print_city(char *city){
     printf("\n%s doesnt not exist or it wasn't created\n", city);
 }
 
+/**
+ * Edita informacoes da cidade
+ * @param city - array cidades
+ * @param lat - latitude
+ * @param log - longitude
+ * @param desc - descricao da cidade
+ * @param cidade - nome da cidade a alterar
+ * @param type - modo de edicao
+ */
 void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, int type){
     for (int i = 0; i < city->total; ++i) {
         if(strcmp(city[i].nome, cidade) == 0){
@@ -213,6 +255,9 @@ void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, 
     }
 }
 
+/**
+ * Escrever para um txt as cidades
+ */
 void write_file_cidade_txt(){
     FILE *file;
     if ((file = fopen("../data/cidade_write.txt", "w")) == NULL) {

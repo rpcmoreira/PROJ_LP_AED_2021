@@ -6,8 +6,14 @@
 #include "math.h"
 
 GERA *g;
+GERA *aux;
 PARAM *p;
 
+
+/**
+ * Comeca o AG com a lista de cidades
+ * @param list
+ */
 void ag(CIDADE *list){
     CIDADE *c = list;
     VIAGEM *v = (VIAGEM *)malloc(sizeof(VIAGEM));
@@ -22,12 +28,29 @@ void ag(CIDADE *list){
     p->n_cidades = v->ncidades;
 
     g = criarPrimeiraGeracao(v, list);
+
+    aux = g;
+    for (int i = 1; i < p->num_geracoes; ++i) {
+        GERA *new = (GERA *)malloc(sizeof(GERA));
+        new->id = aux->id+1;
+        int s = (int)((float)p->tam_p/p->elitism);
+        int* elite[s];
+        geraElitismo(aux, p->elitism, p->tam_p);
+        //exit(-1);
+    }
 }
 
 
 
 
-
+/**
+ * Distancia entre dois pontos
+ * @param x1 - latitude cidade 1
+ * @param x2 - latitude cidade 2
+ * @param y1 - longitude cidade 1
+ * @param y2 - longitude cidade 2
+ * @return
+ */
 double distancia(double x1, double x2, double y1, double y2){
     double dlat = x2 -x1;
     double dlog = y2-y1;
@@ -37,6 +60,12 @@ double distancia(double x1, double x2, double y1, double y2){
     return dist;
 }
 
+/**
+ * Primeira geracao criada
+ * @param v - viagem
+ * @param list - lista de cidades
+ * @return
+ */
 GERA * criarPrimeiraGeracao(VIAGEM *v, CIDADE *list){
     GERA * gera = (GERA *)malloc(sizeof(GERA));
     gera->id = 0;
@@ -85,15 +114,73 @@ GERA * criarPrimeiraGeracao(VIAGEM *v, CIDADE *list){
 
     for (int i = 0; i < p->tam_p; ++i) {
         for (int j = 0; j < p->n_cidades; ++j) {
-            printf("%d ", city[i][j]);
+            //printf("%d ", city[i][j]);
         }
-        printf("\t");
+        //printf("\t");
         for (int j = 0; j < p->n_cidades; ++j) {
-            printf("%f ", dist[i][j]);
+            //printf("%f ", dist[i][j]);
 
         }
-        printf("\t");
-        printf("%f \n", apt[i]);
+        //printf("\t");
+        //printf("%f \n", apt[i]);
     }
     return gera;
+}
+
+/**
+ * Verifica elitismo e quais vai prosseguir
+ * @param gera - geracao
+ * @param f - elitismo
+ * @param n - n total de individuos
+ * @return
+ */
+int **geraElitismo(GERA *gera, float f, int n) {
+    int first = 0,second = 0,third = 0,fourth = 0,fifth = 0;
+    for (int i = 0; i < n; ++i) {
+        if(gera->aptidao[first] < gera->aptidao[i] || first == 0){
+            fifth = fourth;
+            fourth = third;
+            third = second;
+            second = first;
+            first = i;
+        }
+        else if(gera->aptidao[second] < gera->aptidao[i] || second == 0){
+            fifth = fourth;
+            fourth = third;
+            third = second;
+            second = i;
+        }
+        else if(gera->aptidao[first] < gera->aptidao[i] || third == 0){
+            fifth = fourth;
+            fourth = third;
+            third = i;
+        }
+        else if(gera->aptidao[first] < gera->aptidao[i] || fourth == 0){
+            fifth = fourth;
+            fourth = i;
+        }
+        else if(gera->aptidao[first] < gera->aptidao[i] || fifth == 0){
+            fifth = i;
+        }
+    }
+    int eliteaux[] = {first,second,third,fourth,fifth};
+
+    for (int i = 0; i < 5; ++i) {
+        printf("%d\n", eliteaux[i]);
+    }
+    int t = (int)((float)n/f);
+    int* elite[t];
+    for (int i = 0; i < t; ++i) {
+        for (int j = 0; j < p->n_cidades; ++j) {
+            elite[i][j] = gera->rotas[eliteaux[i]][j];
+        }
+    }
+
+    for (int i = 0; i < t; ++i) {
+        for (int j = 0; j < p->n_cidades; ++j) {
+            printf("%d ", elite[i][j]);
+        }
+        printf("\n");
+    }
+    return elite;
 }

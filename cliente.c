@@ -58,6 +58,9 @@ void cliente(int argc, const char *argv[]) {
     write_file_cliente_bin();
 }
 
+/**
+ * Le os clientes do txt
+ */
 void read_file_txt() {
     FILE *file;
     char nome_cidade[MAX100], nome_poi[MAX100],temp[20];
@@ -116,6 +119,9 @@ void read_file_txt() {
     fclose(file);
 }
 
+/**
+ * Escreve os clientes para txt
+ */
 void write_file_client_txt() {
     CLIENTE *temp = client_list->phead;
     FILE *file = fopen("../data/clientes_write.txt", "w");
@@ -141,6 +147,9 @@ void write_file_client_txt() {
     fclose(file);
 }
 
+/**
+ * Ler de um ficheiro bin os clientes
+ */
 void read_file_cliente_bin() {
     FILE *file;
     if ((file = fopen("../data/clientes.bin", "rb")) == null) {
@@ -188,6 +197,9 @@ void read_file_cliente_bin() {
     fclose(file);
 }
 
+/**
+ * Escrever para um bin file os clientes
+ */
 void write_file_cliente_bin() {
     CLIENTE * cliente = client_list->phead;
     FILE *file;
@@ -238,6 +250,18 @@ void write_file_cliente_bin() {
     fclose(file);
 }
 
+/**
+ * adicionar o cliente
+ * @param name - nome a adicionar
+ * @param address - morada
+ * @param n_fiscal - nif
+ * @param contact - contacto
+ * @param day - dia de nascimento
+ * @param month - mes de nascimento
+ * @param year - ano de nascimento
+ * @param list - lista ligada de clientes
+ * @return
+ */
 CLIENTE * add_client(char *name, char *address, int n_fiscal, int contact, int day, int month, int year, CLIENTE_LISTA *list) {
     CLIENTE *client = (CLIENTE *) malloc(sizeof(CLIENTE));
     strcpy(client->nome, name);
@@ -257,6 +281,11 @@ CLIENTE * add_client(char *name, char *address, int n_fiscal, int contact, int d
     //name_order(client_list);
 }
 
+/**
+ * adiciona cliente a cauda da lista
+ * @param client - cliente a adicionar
+ * @param list - lista ligada
+ */
 void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list) {
     if (list->phead == NULL && list->nclientes == 0) { // Se não houver elementos inseridos na lista, insere o atual
         list->phead = client;
@@ -270,6 +299,11 @@ void add_client_to_tail(CLIENTE *client, CLIENTE_LISTA *list) {
     list->ptail->pnext = null;
 }
 
+/**
+ * adiciona cliente a cauda da lista
+ * @param client - cliente a adicionar
+ * @param list - lista ligada
+ */
 void add_client_to_head(CLIENTE *client, CLIENTE_LISTA *list) {
     if (list->phead == NULL && list->nclientes == 0) { // Se não houver elementos inseridos na lista, insere o atual
         list->phead = (CLIENTE *) client;
@@ -283,6 +317,12 @@ void add_client_to_head(CLIENTE *client, CLIENTE_LISTA *list) {
 
 }
 
+/**
+ * Apaga um cliente da lista
+ * @param nif - nif a apagar
+ * @param list - lista ligada de clientes
+ * @return
+ */
 CLIENTE_LISTA *deleteClient(int nif, CLIENTE_LISTA *list) {
     CLIENTE *remove;
     CLIENTE *cur = list->phead;
@@ -314,6 +354,9 @@ CLIENTE_LISTA *deleteClient(int nif, CLIENTE_LISTA *list) {
     return list;
 }
 
+/**
+ * Imprime a linked list toda dos clientes
+ */
 void print_linked_user() {
     CLIENTE *teste = client_list->phead;
     while(teste != null){
@@ -337,6 +380,10 @@ void print_linked_user() {
     }
 }
 
+/**
+ * ordenar pelo nif
+ * @param list - lista de clientes
+ */
 void nif_order(CLIENTE_LISTA *list) {
     CLIENTE *current = (CLIENTE *) list->phead, *index = NULL;
     CLIENTE *temp = (CLIENTE *)malloc(sizeof(CLIENTE));
@@ -384,6 +431,10 @@ void nif_order(CLIENTE_LISTA *list) {
     }
 }
 
+/**
+ * ordenar nome
+ * @param list - Lista Ligada Clientes
+ */
 void name_order(CLIENTE_LISTA *list){
     CLIENTE *current = (CLIENTE *) list->phead, *index = NULL;
     CLIENTE *temp = (CLIENTE *)malloc(sizeof(CLIENTE));
@@ -425,6 +476,11 @@ void name_order(CLIENTE_LISTA *list){
     }
 }
 
+/**
+ * Procura Cliente pelo nome
+ * @param nome - nome do cliente
+ * @param lista - lista ligada clientes
+ */
 void search_nome_client(char *nome, CLIENTE_LISTA * lista){
     CLIENTE *client;
     client = lista->phead;
@@ -453,6 +509,11 @@ void search_nome_client(char *nome, CLIENTE_LISTA * lista){
     }
 }
 
+/**
+ * Procura cliente pelo nif
+ * @param nif - nif do cliente
+ * @param lista - lista ligada
+ */
 void search_nif_client(int nif, CLIENTE_LISTA * lista){
     CLIENTE *client = lista->phead;
     while(client != null){
@@ -477,6 +538,12 @@ void search_nif_client(int nif, CLIENTE_LISTA * lista){
     }
 }
 
+/**
+ * Procura as viagens em que o cliente passou em x cidade
+ * @param nome - cliente
+ * @param lista - lista
+ * @param cidade - cidade
+ */
 void viagem_search(char *nome, CLIENTE_LISTA *lista, char  *cidade){
     CLIENTE *client;
     client = lista->phead;
@@ -499,6 +566,12 @@ void viagem_search(char *nome, CLIENTE_LISTA *lista, char  *cidade){
     }
 }
 
+/**
+ * Procura quando o cliente passou em x poi
+ * @param nome - cliente
+ * @param lista - lista
+ * @param poi - ponto de interesse
+ */
 void poi_search(char *nome, CLIENTE_LISTA *lista, char  *poi){
     CLIENTE *client;
     client = lista->phead;
@@ -523,6 +596,10 @@ void poi_search(char *nome, CLIENTE_LISTA *lista, char  *poi){
     }
 }
 
+/**
+ * Gera relatorio (txt) de um cliente especifico
+ * @param nome - cliente
+ */
 void generate_Rel(char *nome){
     CLIENTE *c = client_list->phead;
     while(c != null){

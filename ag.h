@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 
-typedef struct param{
+typedef struct param{ ///parametros
     int tam_p;
     float prob_mutacao;
     float elitism;
@@ -17,7 +17,7 @@ typedef struct param{
     int n_cidades;
 }PARAM;
 
-typedef struct gera{
+typedef struct gera{ ///geracao
     int id;
     int **rotas;
     double *aptidao;
@@ -30,5 +30,6 @@ void ag(CIDADE *list);
 double distancia(double x1, double x2, double y1, double y2);
 GERA * criarPrimeiraGeracao(VIAGEM *v, CIDADE *list);
 double graus_para_radianos(double deg);
+int **geraElitismo(GERA *gera, float f, int n);
 
 #endif //PROJ_LP_AG_H
