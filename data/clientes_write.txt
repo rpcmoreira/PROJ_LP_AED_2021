@@ -19,5 +19,4 @@ Faro,0
 Coimbra,0
 Ana Moreira,Rua das Verduras n.12,199542361,912345678,27,7,2000,1
 1
-Porto,1
-Estadio do Dragao
+Beja,0

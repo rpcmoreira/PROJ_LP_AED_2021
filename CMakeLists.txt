@@ -3,4 +3,4 @@ project(PROJ_LP C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(PROJ_LP main.c structs.h funct.h cidade.c cidade.h viagem.c viagem.h cliente.c cliente.h poi.c poi.h)
+add_executable(PROJ_LP main.c structs.h funct.h cidade.c cidade.h viagem.c viagem.h cliente.c cliente.h poi.c poi.h ag.c ag.h)

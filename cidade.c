@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "ag.h"
 #define null NULL
 
 #define INFO 258
@@ -17,6 +18,8 @@ void cidade(int argc, const char * argv[]){
     list->total = 0;
     read_file_cidade_txt();
 
+    ag(list);
+    exit(0);
     //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
     //add_City("Barcelos", "Casa do Gil Vicente e do galo de Barcelos", 20.22f, 20.22f);
 
@@ -39,7 +42,7 @@ void cidade(int argc, const char * argv[]){
     //print_city("Barcelos");
 
     write_file_cidade_txt();
-    write_file_cidade_bin();
+    //write_file_cidade_bin();
 }
 
 void read_file_cidade_txt(){
