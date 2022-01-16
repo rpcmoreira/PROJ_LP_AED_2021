@@ -15,21 +15,21 @@ void cliente(int argc, const char *argv[]) {
     read_file_txt();
     //read_file_cliente_bin();
 
-    search_nome_client("Eduardo Ferreira", client_list);
+    //search_nome_client("Eduardo Ferreira", client_list);
     //search_nif_client(233434321, client_list);
 
     //nif_order(client_list);
     //name_order(client_list);
 
-    //add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
+    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
     //viagem_search("Eduardo Ferreira", client_list, "Coimbra");
     //poi_search("Eduardo Ferreira", client_list, "Portugal dos Pequenitos");
 
 
-    //add_viagem(client_list, "Ana Moreira");
-    //add_viagem(client_list, "Ana Moreira");
+    add_viagem(client_list, "Ana Moreira");
+    edit_poi_Viagem(client_list, "Ana Moreira", "Porto", "Estadio do Dragao", 0, 0);
     //add_viagem(client_list, "Carla Dias");
 
     //delete_viagem(client_list, "Eduardo Ferreira");
@@ -51,7 +51,7 @@ void cliente(int argc, const char *argv[]) {
     //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Coimbra", 0, 2);
 
     //search_City("Barcelos");
-    //generate_Rel("Ana Moreira");
+    generate_Rel("Eduardo Ferreira");
     //print_linked_user();
 
     write_file_client_txt();
@@ -210,8 +210,8 @@ void write_file_cliente_bin() {
         ano = cliente->nascimento.ano;
 
 
-        fwrite(&nome, sizeof(strlen(nome)+1), 1, file);
-        fwrite(&morada, sizeof(strlen(morada)+1), 1, file);
+        fwrite(nome, sizeof(nome), 1, file);
+        fwrite(morada, sizeof(morada), 1, file);
         fwrite(&nif, sizeof(int), 1, file);
         fwrite(&cont, sizeof(int), 1, file);
         fwrite(&dia, sizeof(int), 1, file);
@@ -225,10 +225,11 @@ void write_file_cliente_bin() {
             fwrite(&n_cidades, sizeof(int), 1, file);
             for (int j = 0; j < cliente->historico_viagens.p_viagem[i].ncidades; ++j) {
                 strcpy(cidade, cliente->historico_viagens.p_viagem[i].city[j].nome);
-                strcpy(desc, cliente->historico_viagens.p_viagem[i].city[j].descricao);
-
-                fwrite(&cidade, sizeof(strlen(cidade)+1), 1, file);
-                fwrite(&desc, sizeof(strlen(desc)+1), 1, file);
+                fwrite(cidade, sizeof(cidade), 1, file);
+                for (int k = 0; k < cliente->historico_viagens.p_viagem[i].city[j].ar_poi->n_poi; ++k) {
+                    strcpy(desc, cliente->historico_viagens.p_viagem[i].city[j].ar_poi->p_poi[k].nome);
+                    fwrite(desc, sizeof(desc), 1, file);
+                }
             }
         }
         cliente = (CLIENTE *) cliente->pnext;
@@ -540,7 +541,10 @@ void generate_Rel(char *nome){
                 fprintf(file, "\tTrip %d\n", i+1);
                 fprintf(file, "\tThe Person visited: ");
                 for (int j = 0; j < c->historico_viagens.p_viagem[i].ncidades; ++j) {
-                    fprintf(file, "\t\t%s ", c->historico_viagens.p_viagem[i].city[j].nome);
+                    fprintf(file, "\n\t\t%s ", c->historico_viagens.p_viagem[i].city[j].nome);
+                    for (int k = 0; k < c->historico_viagens.p_viagem[i].city[j].ar_poi->n_poi; ++k) {
+                        fprintf(file, "\t\t\tVisitou %s", c->historico_viagens.p_viagem[i].city[j].ar_poi->p_poi[k].nome);
+                    }
                 }
             }
 

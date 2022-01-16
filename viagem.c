@@ -34,6 +34,8 @@ CLIENTE_LISTA *add_viagem(CLIENTE_LISTA *list, char *nome) {
                 gets(buff);
                 cidade[i] = search_City(buff);
             }
+            cidade->ar_poi->n_poi = 0;
+            cidade->ar_poi->p_poi = NULL;
             cliente->historico_viagens.p_viagem[n].city = cidade;
 
             return list;;

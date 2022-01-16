@@ -39,6 +39,7 @@ void cidade(int argc, const char * argv[]){
     //print_city("Barcelos");
 
     write_file_cidade_txt();
+    write_file_cidade_bin();
 }
 
 void read_file_cidade_txt(){
@@ -95,6 +96,31 @@ void read_file_cidade_bin(){
     fclose(file);
     //add_city(id, descricao, latitude, longitude, list);
 }
+
+void write_file_cidade_bin(){
+    FILE *file;
+    char nome_poi[MAX100], desc_poi[MAX100];
+    char temp[20];
+    int n, tam;
+    if ((file = fopen("../data/cidade.bin", "wb")) == NULL) {
+        printf("fopen cidade.bin failed, exiting now...\n");
+        exit(-1);
+    }
+    fwrite(&list->total, sizeof(int), 1, file);
+    for (int i = 0; i < list->total; ++i) {
+        fwrite(list[i].nome, sizeof(strlen(list[i].nome)+1), 1, file);
+        fwrite(list[i].descricao, sizeof(strlen(list[i].descricao)+1), 1, file);
+        fwrite(&list[i].cc.log, sizeof(float), 1, file);
+        fwrite(&list[i].cc.lat, sizeof(float), 1, file);
+        fwrite(&list[i].ar_poi->n_poi, sizeof(int), 1, file);
+        for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
+            fwrite(list[i].ar_poi->p_poi[j].nome, sizeof(strlen(list[i].ar_poi->p_poi[j].nome)+1),1, file);
+            fwrite(list[i].ar_poi->p_poi[j].descricao, sizeof(strlen(list[i].ar_poi->p_poi[j].descricao)+1),1, file);
+        }
+    }
+    fclose(file);
+}
+
 
 CIDADE search_City(char *name){
     for (int i = 0; i < list->total; ++i) {
