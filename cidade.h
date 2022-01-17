@@ -27,7 +27,12 @@ void add_City(char *nome, char *descricao, float lat, float log);
 void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, int type);
 
 CIDADE search_City(char *name);
+void binarySearchCidades(CIDADE *list, char *nome);
+
 POI search_Poi(char *poi, char *cidade);
+
+CIDADE * insertionSort(CIDADE *cidade);
+CIDADE *trocaPos(CIDADE pCidade, CIDADE pCidade1);
 
 void print_all_city();
 void print_city(char *city);

@@ -1,1 +1,15 @@
-
+6
+Aveiro,Aveiro,40.641000,-8.653000,0
+Beja,Beja,38.015000,-7.865000,0
+Coimbra,Cidade do Coimbra,40.211000,-8.429000,2
+Portugal dos Pequenitos,Cidade Miniatura para criancas
+Rio Mondego,Rio Mondego
+Faro,Algarve,37.015000,-7.935000,1
+Estadio do Algarve,Inicio/Fim de etapa do antigo Rali de Portugal
+Lisboa,Cidade do Lisboa,38.707000,-9.135000,3
+Parque das Nacoes,Complexo construido para a Expo98
+Oceanario de Lisboa,Oceanario pretencente ao Parque das Nacoes
+Shopping Colombo,Maior Centro Comercial do Pais
+Porto,Cidade do Porto,41.150000,-8.610000,2
+Torre Clerigos,Torre antiga da cidade do Porto
+Estadio do Dragao,Estadio do Futebol Clube do Porto

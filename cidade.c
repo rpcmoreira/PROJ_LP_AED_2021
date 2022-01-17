@@ -18,8 +18,9 @@ void cidade(int argc, const char * argv[]){
     list->total = 0;
     read_file_cidade_txt();
 
-    ag(list);
-    exit(0);
+    //ag(list);
+
+
     //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
     //add_City("Barcelos", "Casa do Gil Vicente e do galo de Barcelos", 20.22f, 20.22f);
 
@@ -40,7 +41,11 @@ void cidade(int argc, const char * argv[]){
 
     //print_all_city();
     //print_city("Barcelos");
+    binarySearchCidades(list, "Coimbra");
 
+    list = insertionSort(list);
+
+    binarySearchCidades(list, "Coimbra");
     write_file_cidade_txt();
     //write_file_cidade_bin();
 }
@@ -59,7 +64,6 @@ void read_file_cidade_txt(){
 
     fscanf(file, "%d\n", &tam);
     list = (CIDADE *)realloc(list, sizeof(CIDADE)*tam);
-
     for (int i = 0; i < tam; ++i) {
         fscanf(file, "%[^,],", list[i].nome);
         fscanf(file, "%[^,],", list[i].descricao);
@@ -82,7 +86,6 @@ void read_file_cidade_txt(){
         }
 
         list[i].ar_poi = arr_poi;
-
     }
     fclose(file);
 }
@@ -274,3 +277,57 @@ void write_file_cidade_txt(){
     printf("Cidade_write is finished\n");
     fclose(file);
 }
+
+/**
+ * Aplica um binary search de forma a encontrar a cidade
+ * @param cidade - lista de cidades
+ * @param nome - nome da cidade a procurar
+ */
+void binarySearchCidades(CIDADE *cidade, char *nome){
+    int low = 0;
+    int high = cidade->total - 1;
+    while(low <= high){
+        int mid = (low+high)/2;
+
+        if(strcmp(nome, cidade[mid].nome) < 0){
+            high = mid - 1;
+        }
+        else if(strcmp(nome, cidade[mid].nome) > 0){
+            low = mid + 1;
+        }
+        else if(strcmp(nome, cidade[mid].nome) == 0){
+            printf("Found city at position %d", mid);
+            print_city(nome);
+            break;
+        }
+        else{
+            printf("City not found!\n");
+        }
+    }
+}
+
+/**
+ * Reorganiza o array de forma alfabetica usando insertionSort
+ * @param cidade - Array Cidades
+ * @return
+ */
+CIDADE * insertionSort(CIDADE *cidade)
+{
+    int i, j;
+    int p = cidade->total;
+    CIDADE key;
+    for (i = 1; i < p; i++) {
+        key = cidade[i];
+        j = i - 1;
+
+        while (j >= 0 && strcmp(cidade[j].nome, key.nome) > 0) {
+            cidade[j + 1] = cidade[j];
+            j = j - 1;
+        }
+        cidade[j + 1] = key;
+    }
+
+    cidade->total = p;
+    return cidade;
+}
+

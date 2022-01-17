@@ -21,15 +21,15 @@ void cliente(int argc, const char *argv[]) {
     //nif_order(client_list);
     //name_order(client_list);
 
-    add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
+    //add_client("Ana Moreira", "Rua das Verduras n.12", 199542361, 912345678, 27,7,2000, client_list);
     //deleteClient(197654234, client_list);                                                                 //Carla Dias
 
     //viagem_search("Eduardo Ferreira", client_list, "Coimbra");
     //poi_search("Eduardo Ferreira", client_list, "Portugal dos Pequenitos");
 
 
-    add_viagem(client_list, "Ana Moreira");
-    edit_poi_Viagem(client_list, "Ana Moreira", "Porto", "Estadio do Dragao", 0, 0);
+    //add_viagem(client_list, "Ana Moreira");
+    //edit_poi_Viagem(client_list, "Ana Moreira", "Porto", "Estadio do Dragao", 0, 0);
     //add_viagem(client_list, "Carla Dias");
 
     //delete_viagem(client_list, "Eduardo Ferreira");
@@ -51,7 +51,7 @@ void cliente(int argc, const char *argv[]) {
     //client_list = edit_city_Viagem(client_list, "Eduardo Ferreira", "Coimbra", 0, 2);
 
     //search_City("Barcelos");
-    generate_Rel("Eduardo Ferreira");
+    //generate_Rel("Eduardo Ferreira");
     //print_linked_user();
 
     write_file_client_txt();
