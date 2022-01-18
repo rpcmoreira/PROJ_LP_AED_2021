@@ -22,9 +22,9 @@ void cidade(int argc, const char * argv[]){
 
 
     //add_City("Lamego", "Cidade de Lamego", 43.32f, 21.12f);
-    //add_City("Barcelos", "Casa do Gil Vicente e do galo de Barcelos", 20.22f, 20.22f);
+    add_City("Barcelos", "Casa do Gil Vicente e do galo de Barcelos", 20.22f, 20.22f);
 
-    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0);
+    //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 0); //0 descricao, 1 lat/log
     //edit_cidade(list, 42.42f, 42.42f, "Esta e a cidade de lisboa, onde o benfica joga", "Lisboa", 1);
 
     //add_poi(list, "Lamego", "Castelo de Lamego", "Castelo da Cidade de Lamego");
@@ -41,11 +41,11 @@ void cidade(int argc, const char * argv[]){
 
     //print_all_city();
     //print_city("Barcelos");
-    binarySearchCidades(list, "Coimbra");
 
-    list = insertionSort(list);
+    //binarySearchCidades(list, "Coimbra");
+    //list = insertionSort(list);
+    //binarySearchCidades(list, "Coimbra");
 
-    binarySearchCidades(list, "Coimbra");
     write_file_cidade_txt();
     //write_file_cidade_bin();
 }
@@ -91,6 +91,26 @@ void read_file_cidade_txt(){
 }
 
 /**
+ * Escrever para um txt as cidades
+ */
+void write_file_cidade_txt(){
+    FILE *file;
+    if ((file = fopen("../data/cidade_write.txt", "w")) == NULL) {
+        printf("fopen cidade.txt failed, exiting now...\n");
+        exit(-1);
+    }
+    fprintf(file, "%d\n", list->total);
+    for (int i = 0; i < list->total; ++i) {
+        fprintf(file,"%s,%s,%f,%f,%d\n",list[i].nome,list[i].descricao,list[i].cc.log,list[i].cc.lat,list[i].ar_poi->n_poi);
+        for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
+            fprintf(file, "%s,%s\n",list[i].ar_poi->p_poi[j].nome,list[i].ar_poi->p_poi[j].descricao);
+        }
+    }
+    printf("Cidade_write is finished\n");
+    fclose(file);
+}
+
+/**
  * Ler de bin files
  */
 void read_file_cidade_bin(){
@@ -102,10 +122,33 @@ void read_file_cidade_bin(){
         exit(-1);
     }
 
-    //Falta leitura do ficheiro em binario e loop
+    char nome[MAX100], desc[MAX500], p_nome[MAX100], p_desc[MAX250];
+    int n_poi, n_cidades;
+    double lat, log;
 
-    fclose(file);
-    //add_city(id, descricao, latitude, longitude, list);
+    fread(&n_cidades, sizeof(int), 1, file);
+    list = realloc(list, sizeof(CIDADE) * n_cidades);
+    for (int i = 0; i < n_cidades; ++i) {
+        fread(&nome, sizeof(strlen(nome)), 1, file);
+        fread(&desc, sizeof(strlen(desc)), 1, file);
+        fread(&lat, sizeof(double), 1, file);
+        fread(&log, sizeof(double), 1, file);
+        fread(&n_poi, sizeof(int), 1, file);
+
+        strcpy(list[i].nome, nome);
+        strcpy(list[i].descricao, desc);
+        list[i].cc.lat = lat;
+        list[i].cc.log = log;
+        list[i].ar_poi->n_poi = n_poi;
+        list[i].ar_poi->p_poi = realloc(list[i].ar_poi->p_poi, sizeof(POI)*n_poi);
+        for (int j = 0; j < n_poi; ++j){
+            fread(&p_nome, sizeof(strlen(p_nome)), 1, file);
+            fread(&p_desc, sizeof(strlen(p_desc)), 1, file);
+            strcpy(list[i].ar_poi->p_poi[j].nome, nome);
+            strcpy(list[i].ar_poi->p_poi[j].descricao, desc);
+        }
+        fclose(file);
+    }
 }
 
 /**
@@ -258,25 +301,6 @@ void edit_cidade(CIDADE * city, float lat, float log, char *desc, char *cidade, 
     }
 }
 
-/**
- * Escrever para um txt as cidades
- */
-void write_file_cidade_txt(){
-    FILE *file;
-    if ((file = fopen("../data/cidade_write.txt", "w")) == NULL) {
-        printf("fopen cidade.txt failed, exiting now...\n");
-        exit(-1);
-    }
-    fprintf(file, "%d\n", list->total);
-    for (int i = 0; i < list->total; ++i) {
-        fprintf(file,"%s,%s,%f,%f,%d\n",list[i].nome,list[i].descricao,list[i].cc.log,list[i].cc.lat,list[i].ar_poi->n_poi);
-        for (int j = 0; j < list[i].ar_poi->n_poi; ++j) {
-            fprintf(file, "%s,%s\n",list[i].ar_poi->p_poi[j].nome,list[i].ar_poi->p_poi[j].descricao);
-        }
-    }
-    printf("Cidade_write is finished\n");
-    fclose(file);
-}
 
 /**
  * Aplica um binary search de forma a encontrar a cidade
@@ -311,8 +335,7 @@ void binarySearchCidades(CIDADE *cidade, char *nome){
  * @param cidade - Array Cidades
  * @return
  */
-CIDADE * insertionSort(CIDADE *cidade)
-{
+CIDADE * insertionSort(CIDADE *cidade){
     int i, j;
     int p = cidade->total;
     CIDADE key;

@@ -29,7 +29,6 @@ typedef struct gera{ ///geracao
 void ag(CIDADE *list);
 double distancia(double x1, double x2, double y1, double y2);
 GERA * criarPrimeiraGeracao(VIAGEM *v, CIDADE *list);
-double graus_para_radianos(double deg);
-int **geraElitismo(GERA *gera, float f, int n);
+void geraElitismo(GERA *gera, float f, int n);
 
 #endif //PROJ_LP_AG_H

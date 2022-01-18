@@ -33,10 +33,7 @@ void ag(CIDADE *list){
     for (int i = 1; i < p->num_geracoes; ++i) {
         GERA *new = (GERA *)malloc(sizeof(GERA));
         new->id = aux->id+1;
-        int s = (int)((float)p->tam_p/p->elitism);
-        int* elite[s];
         geraElitismo(aux, p->elitism, p->tam_p);
-        //exit(-1);
     }
 }
 
@@ -134,42 +131,38 @@ GERA * criarPrimeiraGeracao(VIAGEM *v, CIDADE *list){
  * @param n - n total de individuos
  * @return
  */
-int **geraElitismo(GERA *gera, float f, int n) {
-    int first = 0,second = 0,third = 0,fourth = 0,fifth = 0;
+void geraElitismo(GERA *gera, float f, int n) {
+    int first = 0, second = 0, third = 0, fourth = 0, fifth = 0;
     for (int i = 0; i < n; ++i) {
-        if(gera->aptidao[first] < gera->aptidao[i] || first == 0){
+        if (gera->aptidao[first] < gera->aptidao[i] || first == 0) {
             fifth = fourth;
             fourth = third;
             third = second;
             second = first;
             first = i;
-        }
-        else if(gera->aptidao[second] < gera->aptidao[i] || second == 0){
+        } else if (gera->aptidao[second] < gera->aptidao[i] || second == 0) {
             fifth = fourth;
             fourth = third;
             third = second;
             second = i;
-        }
-        else if(gera->aptidao[first] < gera->aptidao[i] || third == 0){
+        } else if (gera->aptidao[first] < gera->aptidao[i] || third == 0) {
             fifth = fourth;
             fourth = third;
             third = i;
-        }
-        else if(gera->aptidao[first] < gera->aptidao[i] || fourth == 0){
+        } else if (gera->aptidao[first] < gera->aptidao[i] || fourth == 0) {
             fifth = fourth;
             fourth = i;
-        }
-        else if(gera->aptidao[first] < gera->aptidao[i] || fifth == 0){
+        } else if (gera->aptidao[first] < gera->aptidao[i] || fifth == 0) {
             fifth = i;
         }
     }
-    int eliteaux[] = {first,second,third,fourth,fifth};
+    int eliteaux[] = {first, second, third, fourth, fifth};
 
     for (int i = 0; i < 5; ++i) {
         printf("%d\n", eliteaux[i]);
     }
-    int t = (int)((float)n/f);
-    int* elite[t];
+    int t = (int) ((float) n / f);
+    int *elite[t];
     for (int i = 0; i < t; ++i) {
         for (int j = 0; j < p->n_cidades; ++j) {
             elite[i][j] = gera->rotas[eliteaux[i]][j];
@@ -182,5 +175,4 @@ int **geraElitismo(GERA *gera, float f, int n) {
         }
         printf("\n");
     }
-    return elite;
 }
